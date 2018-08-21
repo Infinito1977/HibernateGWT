@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-mapping>
+  <class name="com.google.musicstore.domain.Record" table="RECORD">
+    <id name="id" column="RECORD_ID">
+      <generator class="native"/>
+    </id>
+    <property name="title"/>
+    <property name="year"/>
+    <property name="price"/>
+
+  </class>
+</hibernate-mapping>
