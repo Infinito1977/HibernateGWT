@@ -4,14 +4,31 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.google.musicstore.client.dto.AccountDTO;
+import com.google.musicstore.client.dto.RecordDTO;
+
 public class Account implements Serializable {
     private static final long serialVersionUID = 7973009858403497681L;
     private Long id;
     private String name;
     private String password;
     private Set<Record> records;
-
+    
     public Account() {}
+
+    public Account(AccountDTO accountDTO) {
+	id = accountDTO.getId();
+	name = accountDTO.getName();
+	password = accountDTO.getPassword();
+	Set<RecordDTO> recordDTOs = accountDTO.getRecords();
+	if (recordDTOs != null) {
+	    Set<Record> records = new HashSet<Record>(recordDTOs.size());
+	    for (RecordDTO recordDTO : recordDTOs) {
+		records.add(new Record(recordDTO));
+	    }
+	    this.records = records;
+	}
+    }
 
     public Account(Long id) {
 	this.id = id;

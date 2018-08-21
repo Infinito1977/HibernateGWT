@@ -20,8 +20,8 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TabPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.musicstore.domain.Account;
-import com.google.musicstore.domain.Record;
+import com.google.musicstore.client.dto.AccountDTO;
+import com.google.musicstore.client.dto.RecordDTO;
 
 /**
  * A overly simplified music store interface to retrieve and view music store accounts and records using GWT RPC
@@ -145,7 +145,7 @@ public class MusicStore implements EntryPoint {
 	// Retrieve the account records table and populate it with account / record
 	// data.
 	final FlexTable accountRecords = (FlexTable) viewAccountRecordsPanel.getWidget(0);
-	musicStoreService.getAccounts(new AsyncCallback<List<Account>>() {
+	musicStoreService.getAccounts(new AsyncCallback<List<AccountDTO>>() {
 
 	    @Override
 	    public void onFailure(Throwable caught) {
@@ -153,7 +153,7 @@ public class MusicStore implements EntryPoint {
 	    }
 
 	    @Override
-	    public void onSuccess(List<Account> result) {
+	    public void onSuccess(List<AccountDTO> result) {
 		if (result == null)
 		    return;
 
@@ -173,10 +173,10 @@ public class MusicStore implements EntryPoint {
 		}
 
 		int index = 1;
-		for (Account account : result) {
-		    Set<Record> records = account.getRecords();
+		for (AccountDTO account : result) {
+		    Set<RecordDTO> records = account.getRecords();
 		    boolean first = true;
-		    for (Record record : records) {
+		    for (RecordDTO record : records) {
 			accountRecords.insertRow(index);
 
 			if (first) {
@@ -229,8 +229,8 @@ public class MusicStore implements EntryPoint {
 		int recordIndex = recordTitles.getSelectedIndex();
 		Long accountId = new Long(accountIds.getValue(accountIndex));
 		Long recordId = new Long(recordTitles.getValue(recordIndex));
-		Account account = new Account(accountId);
-		Record record = new Record(recordId);
+		AccountDTO account = new AccountDTO(accountId);
+		RecordDTO record = new RecordDTO(recordId);
 
 		// Persist the record to the account.
 		musicStoreService.saveRecordToAccount(account, record, new AsyncCallback<Void>() {
@@ -260,17 +260,17 @@ public class MusicStore implements EntryPoint {
      */
     private void loadRecords(final HorizontalPanel addRecordsToAccountPanel,
 	    final MusicStoreServiceAsync musicStoreService) {
-	musicStoreService.getRecords(new AsyncCallback<List<Record>>() {
+	musicStoreService.getRecords(new AsyncCallback<List<RecordDTO>>() {
 	    @Override
 	    public void onFailure(Throwable caught) {
 		Window.alert("Failed to retrieve records.");
 	    }
 
 	    @Override
-	    public void onSuccess(List<Record> result) {
+	    public void onSuccess(List<RecordDTO> result) {
 		ListBox recordTitles = (ListBox) addRecordsToAccountPanel.getWidget(3);
 		recordTitles.clear();
-		for (Record record : result) {
+		for (RecordDTO record : result) {
 		    recordTitles.addItem(record.getTitle(), String.valueOf(record.getId()));
 		}
 	    }
@@ -287,17 +287,17 @@ public class MusicStore implements EntryPoint {
      */
     private void loadAccounts(final HorizontalPanel addRecordsToAccountPanel,
 	    final MusicStoreServiceAsync musicStoreService) {
-	musicStoreService.getAccounts(new AsyncCallback<List<Account>>() {
+	musicStoreService.getAccounts(new AsyncCallback<List<AccountDTO>>() {
 	    @Override
 	    public void onFailure(Throwable caught) {
 		Window.alert("Failed to retrieve accounts.");
 	    }
 
 	    @Override
-	    public void onSuccess(List<Account> result) {
+	    public void onSuccess(List<AccountDTO> result) {
 		ListBox accountIds = (ListBox) addRecordsToAccountPanel.getWidget(1);
 		accountIds.clear();
-		for (Account account : result) {
+		for (AccountDTO account : result) {
 		    accountIds.addItem(String.valueOf(account.getId()), String.valueOf(account.getId()));
 		}
 	    }
@@ -327,7 +327,7 @@ public class MusicStore implements EntryPoint {
 	addRecord.addClickHandler(new ClickHandler() {
 	    @Override
 	    public void onClick(ClickEvent event) {
-		Record record = new Record();
+		RecordDTO record = new RecordDTO();
 		record.setTitle(recordTitle.getText());
 		record.setYear(Integer.valueOf(recordYear.getText()));
 		record.setPrice(Double.valueOf(recordPrice.getText()));
@@ -376,7 +376,7 @@ public class MusicStore implements EntryPoint {
 	addAccount.addClickHandler(new ClickHandler() {
 	    @Override
 	    public void onClick(ClickEvent event) {
-		Account account = new Account();
+		AccountDTO account = new AccountDTO();
 		account.setName(accountName.getText());
 		account.setPassword(accountPassword.getText());
 		musicStoreService.saveAccount(account, new AsyncCallback<Long>() {

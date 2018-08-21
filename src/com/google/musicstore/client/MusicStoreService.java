@@ -4,18 +4,20 @@ import java.util.List;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-import com.google.musicstore.domain.Account;
-import com.google.musicstore.domain.Record;
+import com.google.musicstore.client.dto.AccountDTO;
+import com.google.musicstore.client.dto.RecordDTO;
 
 @RemoteServiceRelativePath("musicservice")
 public interface MusicStoreService extends RemoteService {
-    public List<Account> getAccounts();
+    public List<AccountDTO> getAccounts();
 
-    public List<Record> getRecords();
+    public List<RecordDTO> getRecords();
 
-    public Long saveAccount(Account account);
+    public Long saveAccount(AccountDTO accountDTO);
 
-    public Long saveRecord(Record record);
+    public Long saveRecord(RecordDTO recordDTO);
 
-    public void saveRecordToAccount(Account account, Record record);
+    public void saveRecordToAccount(AccountDTO accountDTO, RecordDTO recordDTO);
+
+    public List<AccountDTO> getAllAccountRecords();
 }

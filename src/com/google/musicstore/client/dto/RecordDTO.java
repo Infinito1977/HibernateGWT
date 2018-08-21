@@ -1,27 +1,29 @@
-package com.google.musicstore.domain;
+package com.google.musicstore.client.dto;
 
 import java.io.Serializable;
 
-import com.google.musicstore.client.dto.RecordDTO;
-
-public class Record implements Serializable {
-    private static final long serialVersionUID = -6362169702509407309L;
+/**
+ * Account version for RPC transfer that does not contain the Hibernate overhead
+ * see http://www.gwtproject.org/articles/using_gwt_with_hibernate.html
+ */
+public class RecordDTO implements Serializable {
+    private static final long serialVersionUID = 4491572249945685435L;
     private Long id;
     private String title;
     private int year;
     private double price;
 
-    public Record() {}
+    public RecordDTO() {}
 
-    public Record(RecordDTO record) {
-	id = record.getId();
-	title = record.getTitle();
-	year = record.getYear();
-	price = record.getPrice();
+    public RecordDTO(Long id) {
+	this.setId(id);
     }
 
-    public Record(Long id) {
-	this.id = id;
+    public RecordDTO(Long id, String title, int year, double price) {
+	this.setId(id);
+	this.setTitle(title);
+	this.setYear(year);
+	this.setPrice(price);
     }
 
     public Long getId() {
