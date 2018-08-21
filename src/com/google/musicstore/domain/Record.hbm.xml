@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.google.musicstore.domain.Record" table="RECORD">
+        <id name="id" column="RECORD_ID">
+            <generator class="native"/>
+        </id>
+        <property name="title"/>
+        <property name="year"/>
+        <property name="price"/>
+    </class>
+</hibernate-mapping>
