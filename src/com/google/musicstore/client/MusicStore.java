@@ -1,25 +1,14 @@
 package com.google.musicstore.client;
 
-import java.util.List;
-
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TabPanel;
-import com.google.musicstore.client.dto.AccountDTO;
-import com.google.musicstore.client.dto.RecordDTO;
 import com.google.musicstore.client.layouts.AddAccountsSubPanel;
 import com.google.musicstore.client.layouts.AddRecordsSubPanel;
+import com.google.musicstore.client.layouts.AddRecordsToAccountPanel;
 import com.google.musicstore.client.layouts.CreateEntriesPanel;
 import com.google.musicstore.client.layouts.GenerateDBEntriesPanel;
 import com.google.musicstore.client.layouts.ViewAccountRecordsPanel;
@@ -50,14 +39,11 @@ public class MusicStore implements EntryPoint {
 		new CreateEntriesPanel(new AddAccountsSubPanel(musicStoreService), new AddRecordsSubPanel(musicStoreService)),
 		"Add Accounts/Records");
 
-	// Create and setup the add records to account panel, and attach to music
-	// store panel.
-	final HorizontalPanel addRecordsToAccountPanel = new HorizontalPanel();
-	constructRecordsToAccountPanel(addRecordsToAccountPanel, musicStoreService);
+	// Create and setup the add records to account panel, and attach to music store panel.
+	final AddRecordsToAccountPanel addRecordsToAccountPanel = new AddRecordsToAccountPanel(musicStoreService);
 	musicStorePanel.add(addRecordsToAccountPanel, "Add Records To Account");
 
-	// Create and setup the view account records panel, and attach to music
-	// store panel.
+	// Create and setup the view account records panel, and attach to music store panel.
 	final ViewAccountRecordsPanel viewAccountRecordsPanel = new ViewAccountRecordsPanel();
 	musicStorePanel.add(viewAccountRecordsPanel, "View Account Records");
 
@@ -77,8 +63,8 @@ public class MusicStore implements EntryPoint {
 		case 0:
 		    break;
 		case 1:
-		    loadAccounts(addRecordsToAccountPanel, musicStoreService);
-		    loadRecords(addRecordsToAccountPanel, musicStoreService);
+		    addRecordsToAccountPanel.loadAccounts(musicStoreService);
+		    addRecordsToAccountPanel.loadRecords(musicStoreService);
 		    break;
 		case 2:
 		    viewAccountRecordsPanel.loadAccountRecords(musicStoreService);
@@ -93,115 +79,5 @@ public class MusicStore implements EntryPoint {
 
 	// Attach the music store panel to the page.
 	RootPanel.get().add(musicStorePanel);
-    }
-
-    /**
-     * Constructs the records to account panel widgets and adds them to the panel.
-     * 
-     * @param addRecordsToAccountPanel
-     *            the panel to construct
-     * @param musicStoreService
-     *            a handle to the music store service
-     */
-    private void constructRecordsToAccountPanel(HorizontalPanel addRecordsToAccountPanel,
-	    final MusicStoreServiceAsync musicStoreService) {
-	addRecordsToAccountPanel.setSize("500px", "500px");
-	addRecordsToAccountPanel.setBorderWidth(1);
-
-	// Setup and connect the record to account panel.
-	Label acctId = new Label("Account Id:");
-	final ListBox accountIds = new ListBox();
-	Label recordTitle = new Label("Record Title:");
-	final ListBox recordTitles = new ListBox();
-	final Button addRecord = new Button("Add Record");
-
-	// Size up list boxes.
-	accountIds.setSize("100px", "35px");
-	recordTitles.setSize("100px", "35px");
-
-	addRecordsToAccountPanel.add(acctId);
-	addRecordsToAccountPanel.add(accountIds);
-	addRecordsToAccountPanel.add(recordTitle);
-	addRecordsToAccountPanel.add(recordTitles);
-
-	// Setup click handler to add selected record to selected account.
-	addRecord.addClickHandler(new ClickHandler() {
-	    @Override
-	    public void onClick(ClickEvent event) {
-		int accountIndex = accountIds.getSelectedIndex();
-		int recordIndex = recordTitles.getSelectedIndex();
-		Long accountId = new Long(accountIds.getValue(accountIndex));
-		Long recordId = new Long(recordTitles.getValue(recordIndex));
-		AccountDTO account = new AccountDTO(accountId);
-		RecordDTO record = new RecordDTO(recordId);
-
-		// Persist the record to the account.
-		musicStoreService.saveRecordToAccount(account, record, new AsyncCallback<Void>() {
-		    @Override
-		    public void onFailure(Throwable caught) {
-			Window.alert("Failed to save records to account.");
-		    }
-
-		    @Override
-		    public void onSuccess(Void result) {
-			Window.alert("Records saved to account.");
-		    }
-
-		});
-	    }
-	});
-	addRecordsToAccountPanel.add(addRecord);
-    }
-
-    /**
-     * Loads all existing records and adds them to the records to account panel list box.
-     * 
-     * @param addRecordsToAccountPanel
-     *            the panel to which the records will be added
-     * @param musicStoreService
-     *            a handle to the music store service
-     */
-    private void loadRecords(final HorizontalPanel addRecordsToAccountPanel, final MusicStoreServiceAsync musicStoreService) {
-	musicStoreService.getRecords(new AsyncCallback<List<RecordDTO>>() {
-	    @Override
-	    public void onFailure(Throwable caught) {
-		Window.alert("Failed to retrieve records.");
-	    }
-
-	    @Override
-	    public void onSuccess(List<RecordDTO> result) {
-		ListBox recordTitles = (ListBox) addRecordsToAccountPanel.getWidget(3);
-		recordTitles.clear();
-		for (RecordDTO record : result) {
-		    recordTitles.addItem(record.getTitle(), String.valueOf(record.getId()));
-		}
-	    }
-	});
-    }
-
-    /**
-     * Loads all existing accounts and adds them to the records to account panel list box.
-     * 
-     * @param addRecordsToAccountPanel
-     *            the panel to which we'll add the accounts
-     * @param musicStoreService
-     *            a handle to the music store service
-     */
-    private void loadAccounts(final HorizontalPanel addRecordsToAccountPanel, final MusicStoreServiceAsync musicStoreService) {
-	musicStoreService.getAccounts(new AsyncCallback<List<AccountDTO>>() {
-	    @Override
-	    public void onFailure(Throwable caught) {
-		Window.alert("Failed to retrieve accounts.");
-	    }
-
-	    @Override
-	    public void onSuccess(List<AccountDTO> result) {
-		ListBox accountIds = (ListBox) addRecordsToAccountPanel.getWidget(1);
-		accountIds.clear();
-		for (AccountDTO account : result) {
-		    accountIds.addItem(String.valueOf(account.getId()), String.valueOf(account.getId()));
-		}
-	    }
-	});
     }
 }
