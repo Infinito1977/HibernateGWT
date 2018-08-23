@@ -23,11 +23,11 @@ public class GenerateDBEntriesPanel extends FlexTable {
 	generateAccounts.addClickHandler(new ClickHandler() {
 	    @Override
 	    public void onClick(ClickEvent event) {
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < new Integer(accountCount.getValue()); i++) {
 		    if (failure)
 			break;
 		    AccountDTO account = new AccountDTO();
-		    account.setName("Account" + i);
+		    account.setName("Account" + (i + 1));
 		    account.setPassword("");
 		    musicStoreService.saveAccount(account, new AsyncCallback<Long>() {
 			public void onFailure(Throwable caught) {
@@ -39,7 +39,7 @@ public class GenerateDBEntriesPanel extends FlexTable {
 			public void onSuccess(Long result) {}
 		    });
 		}
-		Window.alert(ACCOUNT_COUNT + " Accounts succesfully saved");
+		Window.alert(accountCount.getValue() + " Accounts succesfully saved");
 	    }
 	});
 	accountCount.setText(new Integer(ACCOUNT_COUNT).toString());
@@ -71,11 +71,11 @@ public class GenerateDBEntriesPanel extends FlexTable {
 	generateRecords.addClickHandler(new ClickHandler() {
 	    @Override
 	    public void onClick(ClickEvent event) {
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 0; i < new Integer(recordCount.getValue()); i++) {
 		    if (failure)
 			break;
 		    RecordDTO record = new RecordDTO();
-		    record.setTitle("Record" + i);
+		    record.setTitle("Record" + (i + 1));
 		    record.setYear(1999);
 		    record.setPrice(1);
 		    musicStoreService.saveRecord(record, new AsyncCallback<Long>() {
@@ -90,7 +90,7 @@ public class GenerateDBEntriesPanel extends FlexTable {
 
 		    });
 		}
-		Window.alert(RECORD_COUNT + " Records succesfully saved");
+		Window.alert(recordCount.getValue() + " Records succesfully saved");
 	    }
 	});
 	recordCount.setText(new Integer(RECORD_COUNT).toString());
