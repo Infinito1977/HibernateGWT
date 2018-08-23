@@ -36,7 +36,7 @@ public class AddRecordsSubPanel extends VerticalPanel {
 		record.setTitle(recordTitle.getText());
 		record.setYear(Integer.valueOf(recordYear.getText()));
 		record.setPrice(Double.valueOf(recordPrice.getText()));
-		musicStoreService.saveRecord(record, new AsyncCallback<Long>() {
+		musicStoreService.saveRecord(record, true, new AsyncCallback<Long>() {
 		    @Override
 		    public void onFailure(Throwable caught) {
 			Window.alert("Failed to save record.");

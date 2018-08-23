@@ -7,13 +7,15 @@ import com.google.musicstore.client.dto.AccountDTO;
 import com.google.musicstore.client.dto.RecordDTO;
 
 public interface MusicStoreServiceAsync {
+    public void commit(AsyncCallback<Void> callback);
+
     public void getAccounts(AsyncCallback<List<AccountDTO>> callback);
 
     public void getRecords(AsyncCallback<List<RecordDTO>> callback);
 
     public void saveAccount(AccountDTO accountDTO, AsyncCallback<Long> callback);
 
-    public void saveRecord(RecordDTO record, AsyncCallback<Long> callback);
+    public void saveRecord(RecordDTO record, boolean autoCommit, AsyncCallback<Long> callback);
 
     public void deleteAccounts(AsyncCallback<Integer> callback);
 

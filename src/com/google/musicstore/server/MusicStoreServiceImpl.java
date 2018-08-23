@@ -21,6 +21,13 @@ public class MusicStoreServiceImpl extends RemoteServiceServlet implements Music
     private static final long serialVersionUID = -4825786932285819100L;
 
     @Override
+    public void commit() {
+	Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+	session.beginTransaction();
+	session.getTransaction().commit();
+    }
+
+    @Override
     public List<AccountDTO> getAccounts() {
 	Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 	session.beginTransaction();
@@ -62,15 +69,16 @@ public class MusicStoreServiceImpl extends RemoteServiceServlet implements Music
     }
 
     @Override
-    public Long saveRecord(RecordDTO recordDTO) {
+    public Long saveRecord(RecordDTO recordDTO, boolean autoCommit) {
 	Record record = new Record(recordDTO);
 	Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 	session.beginTransaction();
 	session.save(record);
-	session.getTransaction().commit();
+	if (autoCommit)
+	    session.getTransaction().commit();
 	return record.getId();
     }
-    
+
     @Override
     public int deleteAccounts() {
 	Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -80,7 +88,7 @@ public class MusicStoreServiceImpl extends RemoteServiceServlet implements Music
 	session.getTransaction().commit();
 	return queryResult;
     }
-    
+
     @Override
     public int deleteRecords() {
 	Session session = HibernateUtil.getSessionFactory().getCurrentSession();

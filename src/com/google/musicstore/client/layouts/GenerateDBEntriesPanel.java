@@ -29,7 +29,7 @@ public class GenerateDBEntriesPanel extends FlexTable {
 		    if (failure)
 			break;
 		    AccountDTO account = new AccountDTO();
-		    
+
 		    String accountName = "Account";
 		    int length = new Integer(i + 1).toString().length();
 		    for (; length < maxLength; length++) {
@@ -37,7 +37,7 @@ public class GenerateDBEntriesPanel extends FlexTable {
 		    }
 		    accountName += new Integer(i + 1);
 		    account.setName(accountName);
-		    
+
 		    account.setPassword("");
 		    musicStoreService.saveAccount(account, new AsyncCallback<Long>() {
 			public void onFailure(Throwable caught) {
@@ -85,7 +85,7 @@ public class GenerateDBEntriesPanel extends FlexTable {
 	    public void onClick(ClickEvent event) {
 		int recordCount = new Integer(recordCountTB.getValue());
 		int maxLength = new Integer(recordCount).toString().length();
-		for (int i = 0; i < new Integer(recordCountTB.getValue()); i++) {
+		for (int i = 0; i < recordCount; i++) {
 		    if (failure)
 			break;
 		    RecordDTO record = new RecordDTO();
@@ -100,7 +100,7 @@ public class GenerateDBEntriesPanel extends FlexTable {
 
 		    record.setYear(1999);
 		    record.setPrice(1);
-		    musicStoreService.saveRecord(record, new AsyncCallback<Long>() {
+		    musicStoreService.saveRecord(record, false, new AsyncCallback<Long>() {
 			@Override
 			public void onFailure(Throwable caught) {
 			    failure = true;
@@ -112,6 +112,16 @@ public class GenerateDBEntriesPanel extends FlexTable {
 
 		    });
 		}
+		musicStoreService.commit(new AsyncCallback<Void>() {
+		    @Override
+		    public void onFailure(Throwable caught) {
+			Window.alert("Failed to commit.");
+		    }
+
+		    @Override
+		    public void onSuccess(Void result) {}
+
+		});
 		Window.alert(recordCountTB.getValue() + " Records succesfully saved");
 	    }
 	});
