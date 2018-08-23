@@ -1,7 +1,6 @@
 package com.google.musicstore.server;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -41,7 +40,6 @@ public class MusicStoreServiceImpl extends RemoteServiceServlet implements Music
 	session.beginTransaction();
 	List<Record> records = new ArrayList<Record>(session.createQuery("from Record").list());
 	List<RecordDTO> recordDTOs = new ArrayList<RecordDTO>(records != null ? records.size() : 0);
-	Collections.sort(recordDTOs);
 	if (records != null) {
 	    for (Record record : records) {
 		recordDTOs.add(createRecordDTO(record));

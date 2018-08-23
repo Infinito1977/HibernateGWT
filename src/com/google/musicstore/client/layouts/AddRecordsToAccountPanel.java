@@ -1,6 +1,5 @@
 package com.google.musicstore.client.layouts;
 
-import java.util.Collections;
 import java.util.List;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -118,7 +117,7 @@ public class AddRecordsToAccountPanel extends HorizontalPanel {
 	    public void onSuccess(List<RecordDTO> result) {
 		ListBox recordTitles = (ListBox) getWidget(3);
 		recordTitles.clear();
-		Collections.sort(result);
+//		Collections.sort(result);
 		for (RecordDTO record : result) {
 		    recordTitles.addItem(record.getTitle(), String.valueOf(record.getId()));
 		}
