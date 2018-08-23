@@ -49,7 +49,7 @@ public class GenerateDBEntriesPanel extends FlexTable {
 			public void onSuccess(Long result) {}
 		    });
 		}
-		Window.alert(accountCountTB.getValue() + " Accounts succesfully saved");
+		Window.alert(accountCountTB.getValue() + " accounts succesfully saved");
 	    }
 	});
 	accountCountTB.setText(new Integer(ACCOUNT_COUNT).toString());
@@ -66,7 +66,7 @@ public class GenerateDBEntriesPanel extends FlexTable {
 
 		    @Override
 		    public void onSuccess(Integer result) {
-			Window.alert(result + " Records succesfully saved");
+			Window.alert(result + " accounts succesfully deleted");
 		    }
 
 		});
@@ -84,6 +84,7 @@ public class GenerateDBEntriesPanel extends FlexTable {
 	    @Override
 	    public void onClick(ClickEvent event) {
 		int recordCount = new Integer(recordCountTB.getValue());
+		RecordDTO[] recordsDTO = new RecordDTO[recordCount];
 		int maxLength = new Integer(recordCount).toString().length();
 		for (int i = 0; i < recordCount; i++) {
 		    if (failure)
@@ -100,29 +101,20 @@ public class GenerateDBEntriesPanel extends FlexTable {
 
 		    record.setYear(1999);
 		    record.setPrice(1);
-		    musicStoreService.saveRecord(record, false, new AsyncCallback<Long>() {
-			@Override
-			public void onFailure(Throwable caught) {
-			    failure = true;
-			    Window.alert("Failed to save records.");
-			}
-
-			@Override
-			public void onSuccess(Long result) {}
-
-		    });
+		    recordsDTO[i] = record;
 		}
-		musicStoreService.commit(new AsyncCallback<Void>() {
+		musicStoreService.saveRecords(recordsDTO, new AsyncCallback<Void>() {
 		    @Override
 		    public void onFailure(Throwable caught) {
-			Window.alert("Failed to commit.");
+			failure = true;
+			Window.alert("Failed to save records.");
 		    }
 
 		    @Override
-		    public void onSuccess(Void result) {}
-
+		    public void onSuccess(Void result) {
+			Window.alert(recordCountTB.getValue() + " records succesfully saved");
+		    }
 		});
-		Window.alert(recordCountTB.getValue() + " Records succesfully saved");
 	    }
 	});
 	recordCountTB.setText(new Integer(RECORD_COUNT).toString());
@@ -139,7 +131,7 @@ public class GenerateDBEntriesPanel extends FlexTable {
 
 		    @Override
 		    public void onSuccess(Integer result) {
-			Window.alert(result + " Records succesfully saved");
+			Window.alert(result + " records succesfully deleted");
 		    }
 
 		});

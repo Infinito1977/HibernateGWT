@@ -9,15 +9,15 @@ import com.google.musicstore.client.dto.RecordDTO;
 
 @RemoteServiceRelativePath("musicservice")
 public interface MusicStoreService extends RemoteService {
-    public void commit();
-
     public List<AccountDTO> getAccounts();
 
     public List<RecordDTO> getRecords();
 
     public Long saveAccount(AccountDTO accountDTO);
 
-    public Long saveRecord(RecordDTO recordDTO, boolean autoCommit);
+    public Long saveRecord(RecordDTO recordDTO);
+
+    public void saveRecords(RecordDTO[] recordDTOs);
 
     public int deleteAccounts();
 
