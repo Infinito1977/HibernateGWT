@@ -21,7 +21,7 @@ import com.google.musicstore.client.dto.RecordDTO;
  */
 public class ViewAccountRecordsPanel extends VerticalPanel {
     public ViewAccountRecordsPanel() {
-	setSize("500px", "500px");
+	setSize("650px", "500px");
 	setBorderWidth(1);
 
 	// Setup the account records table along with headers.

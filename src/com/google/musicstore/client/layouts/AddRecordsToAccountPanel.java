@@ -25,7 +25,7 @@ public class AddRecordsToAccountPanel extends HorizontalPanel {
      *            a handle to the music store service
      */
     public AddRecordsToAccountPanel(final MusicStoreServiceAsync musicStoreService) {
-	setSize("500px", "500px");
+	setSize("650px", "500px");
 	setBorderWidth(1);
 
 	// Setup and connect the record to account panel.
