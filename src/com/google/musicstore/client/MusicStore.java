@@ -20,6 +20,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.musicstore.client.dto.AccountDTO;
 import com.google.musicstore.client.dto.RecordDTO;
+import com.google.musicstore.client.layouts.AddAccountsAndRecordsPanel;
 import com.google.musicstore.client.layouts.CreateEntriesPanel;
 import com.google.musicstore.client.layouts.GenerateDBEntriesPanel;
 import com.google.musicstore.client.layouts.ViewAccountRecordsPanel;
@@ -35,14 +36,13 @@ public class MusicStore implements EntryPoint {
      */
     public void onModuleLoad() {
 	/*
-	 * Create the tab panel that will contain the three necessary views: (1) Add Accounts / Records: to add new
-	 * accounts / records (2) Add Records To Account: to add existing records to existing accounts (3) View Account
-	 * Records: to view existing accounts and their records.
+	 * Create the tab panel that will contain the three necessary views: (1) Add Accounts / Records: to add new accounts /
+	 * records (2) Add Records To Account: to add existing records to existing accounts (3) View Account Records: to view
+	 * existing accounts and their records.
 	 */
 	final TabPanel musicStorePanel = new TabPanel();
 
 	// Create and setup the creation panel to add accounts / records.
-	final VerticalPanel addAccountPanel = new VerticalPanel();
 	final VerticalPanel addRecordPanel = new VerticalPanel();
 
 	// Create the music store RPC service interface to be used by all
@@ -50,12 +50,12 @@ public class MusicStore implements EntryPoint {
 	final MusicStoreServiceAsync musicStoreService = (MusicStoreServiceAsync) GWT.create(MusicStoreService.class);
 
 	// Construct the Add Account / Record panels.
-	constructAddAccountPanel(addAccountPanel, musicStoreService);
 	constructAddRecordPanel(addRecordPanel, musicStoreService);
 
 	// Connect the creation panel pieces together, and attach to music store
 	// panel.
-	musicStorePanel.add(new CreateEntriesPanel(addAccountPanel, addRecordPanel), "Add Accounts/Records");
+	musicStorePanel.add(new CreateEntriesPanel(new AddAccountsAndRecordsPanel(musicStoreService), addRecordPanel),
+		"Add Accounts/Records");
 
 	// Create and setup the add records to account panel, and attach to music
 	// store panel.
@@ -67,14 +67,14 @@ public class MusicStore implements EntryPoint {
 	// store panel.
 	final ViewAccountRecordsPanel viewAccountRecordsPanel = new ViewAccountRecordsPanel();
 	musicStorePanel.add(viewAccountRecordsPanel, "View Account Records");
-	
+
 	// Add panel to generate DB entries
 	musicStorePanel.add(new GenerateDBEntriesPanel(musicStoreService), "Generate DB Entries");
 
 	/*
-	 * When one of the tabs containing accounts or records to be displayed is selected, we have to load the new
-	 * accounts / records for the appropriate tab. Tab 0: No records to display here. Tab 1: Load all accounts and
-	 * records. Tab 2: Load all accounts and their records.
+	 * When one of the tabs containing accounts or records to be displayed is selected, we have to load the new accounts /
+	 * records for the appropriate tab. Tab 0: No records to display here. Tab 1: Load all accounts and records. Tab 2: Load
+	 * all accounts and their records.
 	 */
 	musicStorePanel.addSelectionHandler(new SelectionHandler<Integer>() {
 	    @Override
@@ -102,7 +102,6 @@ public class MusicStore implements EntryPoint {
 	RootPanel.get().add(musicStorePanel);
     }
 
-
     /**
      * Constructs the records to account panel widgets and adds them to the panel.
      * 
@@ -111,8 +110,7 @@ public class MusicStore implements EntryPoint {
      * @param musicStoreService
      *            a handle to the music store service
      */
-    private void constructRecordsToAccountPanel(HorizontalPanel addRecordsToAccountPanel,
-	    final MusicStoreServiceAsync musicStoreService) {
+    private void constructRecordsToAccountPanel(HorizontalPanel addRecordsToAccountPanel, final MusicStoreServiceAsync musicStoreService) {
 	addRecordsToAccountPanel.setSize("500px", "500px");
 	addRecordsToAccountPanel.setBorderWidth(1);
 
@@ -169,8 +167,7 @@ public class MusicStore implements EntryPoint {
      * @param musicStoreService
      *            a handle to the music store service
      */
-    private void loadRecords(final HorizontalPanel addRecordsToAccountPanel,
-	    final MusicStoreServiceAsync musicStoreService) {
+    private void loadRecords(final HorizontalPanel addRecordsToAccountPanel, final MusicStoreServiceAsync musicStoreService) {
 	musicStoreService.getRecords(new AsyncCallback<List<RecordDTO>>() {
 	    @Override
 	    public void onFailure(Throwable caught) {
@@ -196,8 +193,7 @@ public class MusicStore implements EntryPoint {
      * @param musicStoreService
      *            a handle to the music store service
      */
-    private void loadAccounts(final HorizontalPanel addRecordsToAccountPanel,
-	    final MusicStoreServiceAsync musicStoreService) {
+    private void loadAccounts(final HorizontalPanel addRecordsToAccountPanel, final MusicStoreServiceAsync musicStoreService) {
 	musicStoreService.getAccounts(new AsyncCallback<List<AccountDTO>>() {
 	    @Override
 	    public void onFailure(Throwable caught) {
@@ -223,8 +219,7 @@ public class MusicStore implements EntryPoint {
      * @param musicStoreService
      *            a handle to the music store service
      */
-    private void constructAddRecordPanel(VerticalPanel createRecordPanel,
-	    final MusicStoreServiceAsync musicStoreService) {
+    private void constructAddRecordPanel(VerticalPanel createRecordPanel, final MusicStoreServiceAsync musicStoreService) {
 	createRecordPanel.setSize("500px", "300px");
 	Label recTitle = new Label("Record Title:");
 	final TextBox recordTitle = new TextBox();
@@ -264,48 +259,6 @@ public class MusicStore implements EntryPoint {
 	createRecordPanel.add(recPrice);
 	createRecordPanel.add(recordPrice);
 	createRecordPanel.add(addRecord);
-    }
-
-    /**
-     * Constructs the add account panel widgets and adds them to the panel.
-     * 
-     * @param createAccountPanel
-     *            the panel to construct
-     * @param musicStoreService
-     *            a handle to the music store service
-     */
-    private void constructAddAccountPanel(VerticalPanel createAccountPanel,
-	    final MusicStoreServiceAsync musicStoreService) {
-	createAccountPanel.setSize("500px", "200px");
-	Label acctName = new Label("Account Name:");
-	final TextBox accountName = new TextBox();
-	Label acctPassword = new Label("Account Password:");
-	final TextBox accountPassword = new TextBox();
-	Button addAccount = new Button("Add Account");
-
-	// Save the new account when the add account button is clicked.
-	addAccount.addClickHandler(new ClickHandler() {
-	    @Override
-	    public void onClick(ClickEvent event) {
-		AccountDTO account = new AccountDTO();
-		account.setName(accountName.getText());
-		account.setPassword(accountPassword.getText());
-		musicStoreService.saveAccount(account, new AsyncCallback<Long>() {
-		    public void onFailure(Throwable caught) {
-			Window.alert("Failed to save account.");
-		    }
-
-		    public void onSuccess(Long result) {
-			Window.alert("Account saved");
-		    }
-		});
-	    }
-	});
-	createAccountPanel.add(acctName);
-	createAccountPanel.add(accountName);
-	createAccountPanel.add(acctPassword);
-	createAccountPanel.add(accountPassword);
-	createAccountPanel.add(addAccount);
     }
 
 }
