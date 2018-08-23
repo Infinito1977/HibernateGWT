@@ -11,14 +11,14 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.musicstore.client.MusicStoreServiceAsync;
 import com.google.musicstore.client.dto.RecordDTO;
 
-public class AddRecordsPanel extends VerticalPanel {
+public class AddRecordsSubPanel extends VerticalPanel {
     /**
      * Constructs the add record panel widgets and adds them to the panel.
      * 
      * @param musicStoreService
      *            a handle to the music store service
      */
-    public AddRecordsPanel(final MusicStoreServiceAsync musicStoreService) {
+    public AddRecordsSubPanel(final MusicStoreServiceAsync musicStoreService) {
 	setSize("500px", "300px");
 	Label recTitle = new Label("Record Title:");
 	final TextBox recordTitle = new TextBox();

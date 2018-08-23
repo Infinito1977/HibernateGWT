@@ -19,7 +19,7 @@ import com.google.gwt.user.client.ui.TabPanel;
 import com.google.musicstore.client.dto.AccountDTO;
 import com.google.musicstore.client.dto.RecordDTO;
 import com.google.musicstore.client.layouts.AddAccountsSubPanel;
-import com.google.musicstore.client.layouts.AddRecordsPanel;
+import com.google.musicstore.client.layouts.AddRecordsSubPanel;
 import com.google.musicstore.client.layouts.CreateEntriesPanel;
 import com.google.musicstore.client.layouts.GenerateDBEntriesPanel;
 import com.google.musicstore.client.layouts.ViewAccountRecordsPanel;
@@ -47,7 +47,7 @@ public class MusicStore implements EntryPoint {
 
 	// Connect the creation panel pieces together, and attach to music store panel.
 	musicStorePanel.add(
-		new CreateEntriesPanel(new AddAccountsSubPanel(musicStoreService), new AddRecordsPanel(musicStoreService)),
+		new CreateEntriesPanel(new AddAccountsSubPanel(musicStoreService), new AddRecordsSubPanel(musicStoreService)),
 		"Add Accounts/Records");
 
 	// Create and setup the add records to account panel, and attach to music
