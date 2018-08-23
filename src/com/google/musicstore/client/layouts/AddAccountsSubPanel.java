@@ -11,7 +11,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.musicstore.client.MusicStoreServiceAsync;
 import com.google.musicstore.client.dto.AccountDTO;
 
-public class AddAccountsAndRecordsPanel extends VerticalPanel {
+public class AddAccountsSubPanel extends VerticalPanel {
     /**
      * Constructs the add account panel widgets and adds them to the panel.
      * 
@@ -20,7 +20,7 @@ public class AddAccountsAndRecordsPanel extends VerticalPanel {
      * @param musicStoreService
      *            a handle to the music store service
      */
-    public AddAccountsAndRecordsPanel(final MusicStoreServiceAsync musicStoreService) {
+    public AddAccountsSubPanel(final MusicStoreServiceAsync musicStoreService) {
 	setSize("500px", "200px");
 	Label acctName = new Label("Account Name:");
 	final TextBox accountName = new TextBox();
