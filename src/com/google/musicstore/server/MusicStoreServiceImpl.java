@@ -76,7 +76,9 @@ public class MusicStoreServiceImpl extends RemoteServiceServlet implements Music
 	Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 	session.beginTransaction();
 	Query query = session.createQuery("delete Account");
-	return query.executeUpdate();
+	int queryResult = query.executeUpdate();
+	session.getTransaction().commit();
+	return queryResult;
     }
     
     @Override
@@ -84,7 +86,9 @@ public class MusicStoreServiceImpl extends RemoteServiceServlet implements Music
 	Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 	session.beginTransaction();
 	Query query = session.createQuery("delete Record");
-	return query.executeUpdate();
+	int queryResult = query.executeUpdate();
+	session.getTransaction().commit();
+	return queryResult;
     }
 
     @Override
