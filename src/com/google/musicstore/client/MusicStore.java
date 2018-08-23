@@ -22,6 +22,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.musicstore.client.dto.AccountDTO;
 import com.google.musicstore.client.dto.RecordDTO;
+import com.google.musicstore.client.layouts.CreateEntriesPanel;
 
 /**
  * A overly simplified music store interface to retrieve and view music store accounts and records using GWT RPC
@@ -41,12 +42,8 @@ public class MusicStore implements EntryPoint {
 	final TabPanel musicStorePanel = new TabPanel();
 
 	// Create and setup the creation panel to add accounts / records.
-	final VerticalPanel createEntriesPanel = new VerticalPanel();
 	final VerticalPanel addAccountPanel = new VerticalPanel();
 	final VerticalPanel addRecordPanel = new VerticalPanel();
-
-	createEntriesPanel.setSize("500px", "500px");
-	createEntriesPanel.setBorderWidth(1);
 
 	// Create the music store RPC service interface to be used by all
 	// components.
@@ -58,9 +55,7 @@ public class MusicStore implements EntryPoint {
 
 	// Connect the creation panel pieces together, and attach to music store
 	// panel.
-	createEntriesPanel.add(addAccountPanel);
-	createEntriesPanel.add(addRecordPanel);
-	musicStorePanel.add(createEntriesPanel, "Add Accounts/Records");
+	musicStorePanel.add(new CreateEntriesPanel(addAccountPanel, addRecordPanel), "Add Accounts/Records");
 
 	// Create and setup the add records to account panel, and attach to music
 	// store panel.
