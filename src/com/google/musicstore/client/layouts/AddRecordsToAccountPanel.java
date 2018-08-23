@@ -29,7 +29,7 @@ public class AddRecordsToAccountPanel extends HorizontalPanel {
 	setBorderWidth(1);
 
 	// Setup and connect the record to account panel.
-	Label acctId = new Label("Account Id:");
+	Label acctId = new Label("Account:");
 	final ListBox accountIds = new ListBox();
 	Label recordTitle = new Label("Record Title:");
 	final ListBox recordTitles = new ListBox();
@@ -93,7 +93,7 @@ public class AddRecordsToAccountPanel extends HorizontalPanel {
 		ListBox accountIds = (ListBox) getWidget(1);
 		accountIds.clear();
 		for (AccountDTO account : result) {
-		    accountIds.addItem(String.valueOf(account.getId()), String.valueOf(account.getId()));
+		    accountIds.addItem(String.valueOf(account.getName()), String.valueOf(account.getId()));
 		}
 	    }
 	});
