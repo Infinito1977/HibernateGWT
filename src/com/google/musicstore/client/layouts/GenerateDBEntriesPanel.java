@@ -15,19 +15,29 @@ public class GenerateDBEntriesPanel extends FlexTable {
     private boolean failure = false;
     private final static int ACCOUNT_COUNT = 100;
     private final static int RECORD_COUNT = 1000;
-    private final TextBox accountCount = new TextBox();
-    private final TextBox recordCount = new TextBox();
+    private final TextBox accountCountTB = new TextBox();
+    private final TextBox recordCountTB = new TextBox();
 
     public GenerateDBEntriesPanel(final MusicStoreServiceAsync musicStoreService) {
 	Button generateAccounts = new Button("Generate");
 	generateAccounts.addClickHandler(new ClickHandler() {
 	    @Override
 	    public void onClick(ClickEvent event) {
-		for (int i = 0; i < new Integer(accountCount.getValue()); i++) {
+		int accountCount = new Integer(accountCountTB.getValue());
+		int maxLength = new Integer(accountCount).toString().length();
+		for (int i = 0; i < accountCount; i++) {
 		    if (failure)
 			break;
 		    AccountDTO account = new AccountDTO();
-		    account.setName("Account" + (i + 1));
+		    
+		    String accountName = "Account";
+		    int length = new Integer(i + 1).toString().length();
+		    for (; length < maxLength; length++) {
+			accountName += "0";
+		    }
+		    accountName += new Integer(i + 1);
+		    account.setName(accountName);
+		    
 		    account.setPassword("");
 		    musicStoreService.saveAccount(account, new AsyncCallback<Long>() {
 			public void onFailure(Throwable caught) {
@@ -39,12 +49,13 @@ public class GenerateDBEntriesPanel extends FlexTable {
 			public void onSuccess(Long result) {}
 		    });
 		}
-		Window.alert(accountCount.getValue() + " Accounts succesfully saved");
+		Window.alert(accountCountTB.getValue() + " Accounts succesfully saved");
 	    }
 	});
-	accountCount.setText(new Integer(ACCOUNT_COUNT).toString());
+	accountCountTB.setText(new Integer(ACCOUNT_COUNT).toString());
 	Button deleteAllAccounts = new Button("Delete All");
 	deleteAllAccounts.addClickHandler(new ClickHandler() {
+
 	    @Override
 	    public void onClick(ClickEvent event) {
 		musicStoreService.deleteAccounts(new AsyncCallback<Integer>() {
@@ -63,19 +74,30 @@ public class GenerateDBEntriesPanel extends FlexTable {
 	});
 
 	setWidget(0, 0, generateAccounts);
-	setWidget(0, 1, accountCount);
+	setWidget(0, 1, accountCountTB);
 	setText(0, 2, "Accounts");
 	setWidget(0, 3, deleteAllAccounts);
 
 	Button generateRecords = new Button("Generate");
 	generateRecords.addClickHandler(new ClickHandler() {
+
 	    @Override
 	    public void onClick(ClickEvent event) {
-		for (int i = 0; i < new Integer(recordCount.getValue()); i++) {
+		int recordCount = new Integer(recordCountTB.getValue());
+		int maxLength = new Integer(recordCount).toString().length();
+		for (int i = 0; i < new Integer(recordCountTB.getValue()); i++) {
 		    if (failure)
 			break;
 		    RecordDTO record = new RecordDTO();
-		    record.setTitle("Record" + (i + 1));
+
+		    String recordTitle = "Record";
+		    int length = new Integer(i + 1).toString().length();
+		    for (; length < maxLength; length++) {
+			recordTitle += "0";
+		    }
+		    recordTitle += new Integer(i + 1);
+		    record.setTitle(recordTitle);
+
 		    record.setYear(1999);
 		    record.setPrice(1);
 		    musicStoreService.saveRecord(record, new AsyncCallback<Long>() {
@@ -90,12 +112,13 @@ public class GenerateDBEntriesPanel extends FlexTable {
 
 		    });
 		}
-		Window.alert(recordCount.getValue() + " Records succesfully saved");
+		Window.alert(recordCountTB.getValue() + " Records succesfully saved");
 	    }
 	});
-	recordCount.setText(new Integer(RECORD_COUNT).toString());
+	recordCountTB.setText(new Integer(RECORD_COUNT).toString());
 	Button deleteAllRecords = new Button("Delete All");
 	deleteAllRecords.addClickHandler(new ClickHandler() {
+
 	    @Override
 	    public void onClick(ClickEvent event) {
 		musicStoreService.deleteRecords(new AsyncCallback<Integer>() {
@@ -113,7 +136,7 @@ public class GenerateDBEntriesPanel extends FlexTable {
 	    }
 	});
 	setWidget(1, 0, generateRecords);
-	setWidget(1, 1, recordCount);
+	setWidget(1, 1, recordCountTB);
 	setText(1, 2, "Records");
 	setWidget(1, 3, deleteAllRecords);
     }
