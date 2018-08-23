@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Account version for RPC transfer that does not contain the Hibernate overhead
  * see http://www.gwtproject.org/articles/using_gwt_with_hibernate.html
  */
-public class RecordDTO implements Serializable {
+public class RecordDTO implements Comparable<RecordDTO>, Serializable {
     private static final long serialVersionUID = 4491572249945685435L;
     private Long id;
     private String title;
@@ -56,5 +56,10 @@ public class RecordDTO implements Serializable {
 
     public void setPrice(double price) {
 	this.price = price;
+    }
+
+    @Override
+    public int compareTo(RecordDTO o) {
+	return title.compareTo(o.getTitle());
     }
 }
