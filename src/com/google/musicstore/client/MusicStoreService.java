@@ -17,6 +17,10 @@ public interface MusicStoreService extends RemoteService {
 
     public Long saveRecord(RecordDTO recordDTO);
 
+    public int deleteAccounts();
+
+    public int deleteRecords();
+
     public void saveRecordToAccount(AccountDTO accountDTO, RecordDTO recordDTO);
 
     public List<AccountDTO> getAllAccountRecords();

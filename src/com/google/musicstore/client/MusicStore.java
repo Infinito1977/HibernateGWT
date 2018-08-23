@@ -21,6 +21,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.musicstore.client.dto.AccountDTO;
 import com.google.musicstore.client.dto.RecordDTO;
 import com.google.musicstore.client.layouts.CreateEntriesPanel;
+import com.google.musicstore.client.layouts.GenerateDBEntriesPanel;
 import com.google.musicstore.client.layouts.ViewAccountRecordsPanel;
 
 /**
@@ -66,6 +67,9 @@ public class MusicStore implements EntryPoint {
 	// store panel.
 	final ViewAccountRecordsPanel viewAccountRecordsPanel = new ViewAccountRecordsPanel();
 	musicStorePanel.add(viewAccountRecordsPanel, "View Account Records");
+	
+	// Add panel to generate DB entries
+	musicStorePanel.add(new GenerateDBEntriesPanel(musicStoreService), "Generate DB Entries");
 
 	/*
 	 * When one of the tabs containing accounts or records to be displayed is selected, we have to load the new
@@ -92,7 +96,7 @@ public class MusicStore implements EntryPoint {
 	});
 
 	// Select the first tab by default.
-	musicStorePanel.selectTab(0);
+	musicStorePanel.selectTab(3);
 
 	// Attach the music store panel to the page.
 	RootPanel.get().add(musicStorePanel);

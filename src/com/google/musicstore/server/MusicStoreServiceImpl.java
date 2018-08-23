@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -68,6 +69,22 @@ public class MusicStoreServiceImpl extends RemoteServiceServlet implements Music
 	session.save(record);
 	session.getTransaction().commit();
 	return record.getId();
+    }
+    
+    @Override
+    public int deleteAccounts() {
+	Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+	session.beginTransaction();
+	Query query = session.createQuery("delete Account");
+	return query.executeUpdate();
+    }
+    
+    @Override
+    public int deleteRecords() {
+	Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+	session.beginTransaction();
+	Query query = session.createQuery("delete Record");
+	return query.executeUpdate();
     }
 
     @Override
