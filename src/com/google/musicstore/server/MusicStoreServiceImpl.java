@@ -60,6 +60,17 @@ public class MusicStoreServiceImpl extends RemoteServiceServlet implements Music
 	session.getTransaction().commit();
 	return account.getId();
     }
+    
+    @Override
+    public void saveAccounts(AccountDTO[] accountsDTO) {
+	Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+	session.beginTransaction();
+	for (int i = 0; i < accountsDTO.length; i++) {
+	    Account account = new Account(accountsDTO[i]);
+	    session.save(account);
+	}
+	session.getTransaction().commit();
+    }
 
     @Override
     public Long saveRecord(RecordDTO recordDTO) {

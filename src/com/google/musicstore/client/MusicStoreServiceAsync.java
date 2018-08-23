@@ -13,8 +13,10 @@ public interface MusicStoreServiceAsync {
 
     public void saveAccount(AccountDTO accountDTO, AsyncCallback<Long> callback);
 
+    public void saveAccounts(AccountDTO[] accountsDTO, AsyncCallback<Void> callback);
+
     public void saveRecord(RecordDTO record, AsyncCallback<Long> callback);
-    
+
     public void saveRecords(RecordDTO[] recordDTOs, AsyncCallback<Void> callback);
 
     public void deleteAccounts(AsyncCallback<Integer> callback);

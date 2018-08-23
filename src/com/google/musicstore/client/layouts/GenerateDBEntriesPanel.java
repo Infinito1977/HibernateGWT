@@ -24,6 +24,7 @@ public class GenerateDBEntriesPanel extends FlexTable {
 	    @Override
 	    public void onClick(ClickEvent event) {
 		int accountCount = new Integer(accountCountTB.getValue());
+		AccountDTO[] accountsDTO = new AccountDTO[accountCount];
 		int maxLength = new Integer(accountCount).toString().length();
 		for (int i = 0; i < accountCount; i++) {
 		    if (failure)
@@ -39,17 +40,19 @@ public class GenerateDBEntriesPanel extends FlexTable {
 		    account.setName(accountName);
 
 		    account.setPassword("");
-		    musicStoreService.saveAccount(account, new AsyncCallback<Long>() {
-			public void onFailure(Throwable caught) {
-			    failure = true;
-			    Window.alert("Failed to save accounts.");
-			}
-
-			@Override
-			public void onSuccess(Long result) {}
-		    });
+		    accountsDTO[i] = account;
 		}
-		Window.alert(accountCountTB.getValue() + " accounts succesfully saved");
+		musicStoreService.saveAccounts(accountsDTO, new AsyncCallback<Void>() {
+		    public void onFailure(Throwable caught) {
+			failure = true;
+			Window.alert("Failed to save accounts.");
+		    }
+
+		    @Override
+		    public void onSuccess(Void result) {
+			Window.alert(accountCountTB.getValue() + " accounts succesfully saved");
+		    }
+		});
 	    }
 	});
 	accountCountTB.setText(new Integer(ACCOUNT_COUNT).toString());
