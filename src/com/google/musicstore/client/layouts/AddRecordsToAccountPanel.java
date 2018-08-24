@@ -7,11 +7,9 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.musicstore.client.MusicStoreServiceAsync;
 import com.google.musicstore.client.dto.AccountDTO;
 import com.google.musicstore.client.dto.RecordDTO;
@@ -83,13 +81,7 @@ public class AddRecordsToAccountPanel extends HorizontalPanel {
      *            a handle to the music store service
      */
     public void loadAccounts(final MusicStoreServiceAsync musicStoreService) {
-	final PopupPanel blockPanel = new PopupPanel();
-	blockPanel.setWidget(new HTML("Retrieving accounts..."));
-	int left = (int) ((Window.getClientWidth()) / 2.5);
-	int top = (int) ((Window.getClientHeight()) / 2.5 - 20);
-	blockPanel.setPopupPosition(left, top);
-	blockPanel.setGlassEnabled(true);
-	blockPanel.show();
+	final BlockAccountsPanel blockPanel = new BlockAccountsPanel();
 	musicStoreService.getAccounts(new AsyncCallback<List<AccountDTO>>() {
 	    @Override
 	    public void onFailure(Throwable caught) {
@@ -117,13 +109,7 @@ public class AddRecordsToAccountPanel extends HorizontalPanel {
      *            a handle to the music store service
      */
     public void loadRecords(final MusicStoreServiceAsync musicStoreService) {
-	final PopupPanel blockPanel = new PopupPanel();
-	blockPanel.setWidget(new HTML("Retrieving records..."));
-	int left = (int) ((Window.getClientWidth()) / 2.5);
-	int top = (int) ((Window.getClientHeight()) / 2.5 + 20);
-	blockPanel.setPopupPosition(left, top);
-	blockPanel.setGlassEnabled(true);
-	blockPanel.show();
+	final BlockRecordsPanel blockPanel = new BlockRecordsPanel();
 	musicStoreService.getRecords(new AsyncCallback<List<RecordDTO>>() {
 	    @Override
 	    public void onFailure(Throwable caught) {
