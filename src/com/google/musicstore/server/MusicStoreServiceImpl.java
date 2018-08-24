@@ -8,7 +8,6 @@ import java.util.Set;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.google.musicstore.client.MusicStoreService;
