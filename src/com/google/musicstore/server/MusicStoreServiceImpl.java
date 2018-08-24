@@ -122,21 +122,6 @@ public class MusicStoreServiceImpl extends RemoteServiceServlet implements Music
 	session.getTransaction().commit();
     }
 
-    @Override
-    public List<AccountDTO> getAllAccountRecords() {
-	Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-	session.beginTransaction();
-	List<Account> accounts = new ArrayList<Account>(session.createQuery("from Account").list());
-	List<AccountDTO> accountDTOs = new ArrayList<AccountDTO>(accounts != null ? accounts.size() : 0);
-	if (accounts != null) {
-	    for (Account account : accounts) {
-		accountDTOs.add(createAccountDTO(account));
-	    }
-	}
-	session.getTransaction().commit();
-	return accountDTOs;
-    }
-
     private AccountDTO createAccountDTO(Account account) {
 	Set<Record> records = account.getRecords();
 	Set<RecordDTO> recordDTOs = new HashSet<RecordDTO>(records != null ? records.size() : 0);
