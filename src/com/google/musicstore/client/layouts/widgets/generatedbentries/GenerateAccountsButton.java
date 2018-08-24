@@ -1,9 +1,7 @@
 package com.google.musicstore.client.layouts.widgets.generatedbentries;
 
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
@@ -48,30 +46,4 @@ public class GenerateAccountsButton extends Button {
 	    }
 	});
     }
-
-    public GenerateAccountsButton(SafeHtml html) {
-	super(html);
-	// TODO Auto-generated constructor stub
-    }
-
-    public GenerateAccountsButton(String html) {
-	super(html);
-	// TODO Auto-generated constructor stub
-    }
-
-    public GenerateAccountsButton(Element element) {
-	super(element);
-	// TODO Auto-generated constructor stub
-    }
-
-    public GenerateAccountsButton(SafeHtml html, ClickHandler handler) {
-	super(html, handler);
-	// TODO Auto-generated constructor stub
-    }
-
-    public GenerateAccountsButton(String html, ClickHandler handler) {
-	super(html, handler);
-	// TODO Auto-generated constructor stub
-    }
-
 }
