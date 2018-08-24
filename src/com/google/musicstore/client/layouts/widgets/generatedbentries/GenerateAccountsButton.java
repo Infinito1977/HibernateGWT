@@ -8,6 +8,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.musicstore.client.MusicStoreServiceAsync;
 import com.google.musicstore.client.dto.AccountDTO;
+import com.google.musicstore.client.layouts.BlockAccountsPanel;
 
 public class GenerateAccountsButton extends Button {
 
@@ -16,6 +17,7 @@ public class GenerateAccountsButton extends Button {
 	addClickHandler(new ClickHandler() {
 	    @Override
 	    public void onClick(ClickEvent event) {
+		final BlockAccountsPanel blockAccountsPanel = new BlockAccountsPanel("Saving accounts");
 		int accountCount = new Integer(accountCountTB.getValue());
 		AccountDTO[] accountsDTO = new AccountDTO[accountCount];
 		int maxLength = new Integer(accountCount).toString().length();
@@ -35,11 +37,13 @@ public class GenerateAccountsButton extends Button {
 		}
 		musicStoreService.saveAccounts(accountsDTO, new AsyncCallback<Void>() {
 		    public void onFailure(Throwable caught) {
+			blockAccountsPanel.setVisible(false);
 			Window.alert("Failed to save accounts.");
 		    }
 
 		    @Override
 		    public void onSuccess(Void result) {
+			blockAccountsPanel.setVisible(false);
 			Window.alert(accountCountTB.getValue() + " accounts succesfully saved");
 		    }
 		});
