@@ -3,6 +3,7 @@ package com.google.musicstore.client.layouts;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.musicstore.client.MusicStoreServiceAsync;
+import com.google.musicstore.client.layouts.widgets.generatedbentries.DeleteAllAccountRecordsButton;
 import com.google.musicstore.client.layouts.widgets.generatedbentries.DeleteAllAccountsButton;
 import com.google.musicstore.client.layouts.widgets.generatedbentries.DeleteAllRecordsButton;
 import com.google.musicstore.client.layouts.widgets.generatedbentries.GenerateAccountsButton;
@@ -30,6 +31,6 @@ public class GenerateDBEntriesPanel extends FlexTable {
 	setWidget(1, 3, new DeleteAllRecordsButton(musicStoreService));
 	
 	// Generate links between accounts and records or delete them again
-	// TODO: blocking PopupWindow for Buttons
+	setWidget(2, 3, new DeleteAllAccountRecordsButton(musicStoreService));
     }
 }

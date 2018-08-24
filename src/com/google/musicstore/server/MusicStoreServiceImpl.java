@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Set;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.google.musicstore.client.MusicStoreService;
@@ -58,7 +60,7 @@ public class MusicStoreServiceImpl extends RemoteServiceServlet implements Music
 	session.getTransaction().commit();
 	return account.getId();
     }
-    
+
     @Override
     public void saveAccounts(AccountDTO[] accountsDTO) {
 	Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -106,6 +108,16 @@ public class MusicStoreServiceImpl extends RemoteServiceServlet implements Music
 	Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 	session.beginTransaction();
 	Query query = session.createQuery("delete Record");
+	int queryResult = query.executeUpdate();
+	session.getTransaction().commit();
+	return queryResult;
+    }
+
+    @Override
+    public int deleteAccountRecords() {
+	Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+	session.beginTransaction();
+	SQLQuery query = session.createSQLQuery("delete from account_record");
 	int queryResult = query.executeUpdate();
 	session.getTransaction().commit();
 	return queryResult;

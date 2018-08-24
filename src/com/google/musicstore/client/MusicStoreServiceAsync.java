@@ -22,6 +22,8 @@ public interface MusicStoreServiceAsync {
     public void deleteAccounts(AsyncCallback<Integer> callback);
 
     public void deleteRecords(AsyncCallback<Integer> callback);
+    
+    public void deleteAccountRecords(AsyncCallback<Integer> callback);
 
     public void saveRecordToAccount(AccountDTO accountDTO, RecordDTO recordDTO, AsyncCallback<Void> callback);
 }
