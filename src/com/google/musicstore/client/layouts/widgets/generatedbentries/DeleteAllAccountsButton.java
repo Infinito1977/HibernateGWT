@@ -23,10 +23,8 @@ public class DeleteAllAccountsButton extends Button {
 		    public void onSuccess(Integer result) {
 			Window.alert(result + " accounts succesfully deleted");
 		    }
-
 		});
 	    }
 	});
-
     }
 }
