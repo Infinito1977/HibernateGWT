@@ -81,6 +81,7 @@ public class AddRecordsToAccountPanel extends HorizontalPanel {
      *            a handle to the music store service
      */
     public void loadAccounts(final MusicStoreServiceAsync musicStoreService) {
+	// TODO: blocking PopupWindow when receiving Accounts
 	musicStoreService.getAccounts(new AsyncCallback<List<AccountDTO>>() {
 	    @Override
 	    public void onFailure(Throwable caught) {
@@ -107,6 +108,7 @@ public class AddRecordsToAccountPanel extends HorizontalPanel {
      *            a handle to the music store service
      */
     public void loadRecords(final MusicStoreServiceAsync musicStoreService) {
+	// TODO: blocking PopupWindow when receiving Records
 	musicStoreService.getRecords(new AsyncCallback<List<RecordDTO>>() {
 	    @Override
 	    public void onFailure(Throwable caught) {

@@ -28,5 +28,8 @@ public class GenerateDBEntriesPanel extends FlexTable {
 	setWidget(1, 1, recordCountTB);
 	setText(1, 2, "Records");
 	setWidget(1, 3, new DeleteAllRecordsButton(musicStoreService));
+	
+	// Generate links between accounts and records or delete them again
+	// TODO: blocking PopupWindow for Buttons
     }
 }
