@@ -85,6 +85,7 @@ public class AddRecordsToAccountPanel extends HorizontalPanel {
 	musicStoreService.getAccounts(new AsyncCallback<List<AccountDTO>>() {
 	    @Override
 	    public void onFailure(Throwable caught) {
+		blockPanel.setVisible(false);
 		Window.alert("Failed to retrieve accounts.");
 	    }
 
@@ -113,6 +114,7 @@ public class AddRecordsToAccountPanel extends HorizontalPanel {
 	musicStoreService.getRecords(new AsyncCallback<List<RecordDTO>>() {
 	    @Override
 	    public void onFailure(Throwable caught) {
+		blockPanel.setVisible(false);
 		Window.alert("Failed to retrieve records.");
 	    }
 
