@@ -1,4 +1,4 @@
-package com.google.musicstore.client.layouts;
+package com.google.musicstore.client.layouts.sub;
 
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.PopupPanel;

@@ -8,7 +8,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.musicstore.client.MusicStoreServiceAsync;
 import com.google.musicstore.client.dto.RecordDTO;
-import com.google.musicstore.client.layouts.BlockRecordsPanel;
+import com.google.musicstore.client.layouts.sub.BlockRecordsPanel;
 
 public class GenerateRecordsButton extends Button {
     public GenerateRecordsButton(final MusicStoreServiceAsync musicStoreService, final TextBox recordCountTB) {

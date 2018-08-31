@@ -13,6 +13,8 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.musicstore.client.MusicStoreServiceAsync;
 import com.google.musicstore.client.dto.AccountDTO;
 import com.google.musicstore.client.dto.RecordDTO;
+import com.google.musicstore.client.layouts.sub.BlockAccountsPanel;
+import com.google.musicstore.client.layouts.sub.BlockRecordsPanel;
 
 public class AddRecordsToAccountPanel extends HorizontalPanel {
     /**
