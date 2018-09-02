@@ -1,5 +1,7 @@
 package com.google.musicstore.client.layouts.widgets.generatedbentries;
 
+import java.util.logging.Logger;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
@@ -11,13 +13,18 @@ import com.google.musicstore.client.dto.AccountDTO;
 import com.google.musicstore.client.layouts.sub.BlockAccountsPanel;
 
 public class GenerateAccountsButton extends Button {
+    private static Logger logger;
 
-    public GenerateAccountsButton(final MusicStoreServiceAsync musicStoreService, final TextBox accountCountTB) {
+    public GenerateAccountsButton(final MusicStoreServiceAsync musicStoreService, final TextBox accountCountTB,
+	    Logger parentLogger) {
 	super("Generate");
+	logger = Logger.getLogger(this.getClass().getName());
+	logger.setParent(parentLogger);
 	addClickHandler(new ClickHandler() {
 	    @Override
 	    public void onClick(ClickEvent event) {
-		final BlockAccountsPanel blockAccountsPanel = new BlockAccountsPanel("Saving accounts");
+		logger.info("GenerateAccountsButton clicked");
+		final BlockAccountsPanel blockAccountsPanel = new BlockAccountsPanel("Saving accounts", logger);
 		int accountCount = new Integer(accountCountTB.getValue());
 		AccountDTO[] accountsDTO = new AccountDTO[accountCount];
 		int maxLength = new Integer(accountCount).toString().length();
@@ -39,15 +46,18 @@ public class GenerateAccountsButton extends Button {
 		    public void onFailure(Throwable caught) {
 			blockAccountsPanel.setVisible(false);
 			Window.alert("Failed to save accounts.");
+			logger.severe(caught.getLocalizedMessage());
 		    }
 
 		    @Override
 		    public void onSuccess(Void result) {
 			blockAccountsPanel.setVisible(false);
 			Window.alert(accountCountTB.getValue() + " accounts succesfully saved");
+			logger.info(accountCountTB.getValue() + " accounts succesfully saved");
 		    }
 		});
 	    }
 	});
+	logger.finest("GenerateAccountsButton initialized");
     }
 }

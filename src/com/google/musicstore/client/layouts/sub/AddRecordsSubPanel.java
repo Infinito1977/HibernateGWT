@@ -1,5 +1,7 @@
 package com.google.musicstore.client.layouts.sub;
 
+import java.util.logging.Logger;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
@@ -12,13 +14,18 @@ import com.google.musicstore.client.MusicStoreServiceAsync;
 import com.google.musicstore.client.dto.RecordDTO;
 
 public class AddRecordsSubPanel extends VerticalPanel {
+    private static Logger logger;
+
     /**
      * Constructs the add record panel widgets and adds them to the panel.
      * 
      * @param musicStoreService
      *            a handle to the music store service
      */
-    public AddRecordsSubPanel(final MusicStoreServiceAsync musicStoreService) {
+    public AddRecordsSubPanel(final MusicStoreServiceAsync musicStoreService, Logger parentLogger) {
+	logger = Logger.getLogger(this.getClass().getName());
+	logger.setParent(parentLogger);
+	// TODO: remove setSize?
 	setSize("500px", "300px");
 	Label recTitle = new Label("Record Title:");
 	final TextBox recordTitle = new TextBox();
@@ -40,11 +47,13 @@ public class AddRecordsSubPanel extends VerticalPanel {
 		    @Override
 		    public void onFailure(Throwable caught) {
 			Window.alert("Failed to save record.");
+			logger.severe(caught.getLocalizedMessage());
 		    }
 
 		    @Override
 		    public void onSuccess(Long result) {
 			Window.alert("Record saved");
+			logger.info("Record saved");
 		    }
 
 		});
@@ -58,5 +67,6 @@ public class AddRecordsSubPanel extends VerticalPanel {
 	add(recPrice);
 	add(recordPrice);
 	add(addRecord);
+	logger.finest("Sub Panel <<Add Accounts/Records->Add Records>> initialized");
     }
 }

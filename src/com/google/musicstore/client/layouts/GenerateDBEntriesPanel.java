@@ -23,20 +23,20 @@ public class GenerateDBEntriesPanel extends FlexTable {
 	logger.setParent(parentLogger);
 	// Generate and delete accounts
 	accountCountTB.setText(new Integer(ACCOUNT_COUNT).toString());
-	setWidget(0, 0, new GenerateAccountsButton(musicStoreService, accountCountTB));
+	setWidget(0, 0, new GenerateAccountsButton(musicStoreService, accountCountTB, logger));
 	setWidget(0, 1, accountCountTB);
 	setText(0, 2, "Accounts");
-	setWidget(0, 3, new DeleteAllAccountsButton(musicStoreService));
+	setWidget(0, 3, new DeleteAllAccountsButton(musicStoreService, logger));
 
 	// Generate and delete records
 	recordCountTB.setText(new Integer(RECORD_COUNT).toString());
-	setWidget(1, 0, new GenerateRecordsButton(musicStoreService, recordCountTB));
+	setWidget(1, 0, new GenerateRecordsButton(musicStoreService, recordCountTB, logger));
 	setWidget(1, 1, recordCountTB);
 	setText(1, 2, "Records");
-	setWidget(1, 3, new DeleteAllRecordsButton(musicStoreService));
+	setWidget(1, 3, new DeleteAllRecordsButton(musicStoreService, logger));
 	
 	// Generate links between accounts and records or delete them again
-	setWidget(2, 3, new DeleteAllAccountRecordsButton(musicStoreService));
+	setWidget(2, 3, new DeleteAllAccountRecordsButton(musicStoreService, logger));
 	logger.finer("Panel <<Generate DB Entries>> initialized");
     }
 }

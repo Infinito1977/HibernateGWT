@@ -1,5 +1,7 @@
 package com.google.musicstore.client.layouts.sub;
 
+import java.util.logging.Logger;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
@@ -12,6 +14,8 @@ import com.google.musicstore.client.MusicStoreServiceAsync;
 import com.google.musicstore.client.dto.AccountDTO;
 
 public class AddAccountsSubPanel extends VerticalPanel {
+    private static Logger logger;
+
     /**
      * Constructs the add account panel widgets and adds them to the panel.
      * 
@@ -20,7 +24,10 @@ public class AddAccountsSubPanel extends VerticalPanel {
      * @param musicStoreService
      *            a handle to the music store service
      */
-    public AddAccountsSubPanel(final MusicStoreServiceAsync musicStoreService) {
+    public AddAccountsSubPanel(final MusicStoreServiceAsync musicStoreService, Logger parentLogger) {
+	logger = Logger.getLogger(this.getClass().getName());
+	logger.setParent(parentLogger);
+	// TODO: remove setSize?
 	setSize("500px", "200px");
 	Label acctName = new Label("Account Name:");
 	final TextBox accountName = new TextBox();
@@ -38,10 +45,12 @@ public class AddAccountsSubPanel extends VerticalPanel {
 		musicStoreService.saveAccount(account, new AsyncCallback<Long>() {
 		    public void onFailure(Throwable caught) {
 			Window.alert("Failed to save account.");
+			logger.severe(caught.getLocalizedMessage());
 		    }
 
 		    public void onSuccess(Long result) {
 			Window.alert("Account saved");
+			logger.info("Account saved");
 		    }
 		});
 	    }
@@ -51,5 +60,6 @@ public class AddAccountsSubPanel extends VerticalPanel {
 	add(acctPassword);
 	add(accountPassword);
 	add(addAccount);
+	logger.finest("Sub Panel <<Add Accounts/Records->Add Accounts>> initialized");
     }
 }

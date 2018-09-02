@@ -1,5 +1,7 @@
 package com.google.musicstore.client.layouts.widgets.generatedbentries;
 
+import java.util.logging.Logger;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
@@ -11,12 +13,18 @@ import com.google.musicstore.client.dto.RecordDTO;
 import com.google.musicstore.client.layouts.sub.BlockRecordsPanel;
 
 public class GenerateRecordsButton extends Button {
-    public GenerateRecordsButton(final MusicStoreServiceAsync musicStoreService, final TextBox recordCountTB) {
+    private static Logger logger;
+
+    public GenerateRecordsButton(final MusicStoreServiceAsync musicStoreService, final TextBox recordCountTB,
+	    Logger parentLogger) {
 	super("Generate");
+	logger = Logger.getLogger(this.getClass().getName());
+	logger.setParent(parentLogger);
 	addClickHandler(new ClickHandler() {
 	    @Override
 	    public void onClick(ClickEvent event) {
-		final BlockRecordsPanel blockRecordsPanel = new BlockRecordsPanel("Saving records");
+		logger.info("GenerateRecordsButton clicked");
+		final BlockRecordsPanel blockRecordsPanel = new BlockRecordsPanel("Saving records", logger);
 		int recordCount = new Integer(recordCountTB.getValue());
 		RecordDTO[] recordsDTO = new RecordDTO[recordCount];
 		int maxLength = new Integer(recordCount).toString().length();
@@ -40,15 +48,18 @@ public class GenerateRecordsButton extends Button {
 		    public void onFailure(Throwable caught) {
 			blockRecordsPanel.setVisible(false);
 			Window.alert("Failed to save records.");
+			logger.severe(caught.getLocalizedMessage());
 		    }
 
 		    @Override
 		    public void onSuccess(Void result) {
 			blockRecordsPanel.setVisible(false);
 			Window.alert(recordCountTB.getValue() + " records succesfully saved");
+			logger.info(recordCountTB.getValue() + " records succesfully saved");
 		    }
 		});
 	    }
 	});
+	logger.finest("GenerateRecordsButton initialized");
     }
 }

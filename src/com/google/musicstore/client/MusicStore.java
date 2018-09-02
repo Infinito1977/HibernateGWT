@@ -25,7 +25,8 @@ public class MusicStore implements EntryPoint {
     
     public MusicStore() {
 	logger = Logger.getLogger(this.getClass().getName());
-	logger.setLevel(Level.FINER);
+	// TODO: Remove log level here
+	logger.setLevel(Level.FINEST);
     }
 
     public void onModuleLoad() {
@@ -41,9 +42,10 @@ public class MusicStore implements EntryPoint {
 	// components.
 	final MusicStoreServiceAsync musicStoreService = (MusicStoreServiceAsync) GWT.create(MusicStoreService.class);
 
+	// TODO: move sub panels to panel contructors?
 	// Connect the creation panel pieces together, and attach to music store panel.
-	musicStorePanel.add(new AddAccountsAndRecordsPanel(new AddAccountsSubPanel(musicStoreService),
-		new AddRecordsSubPanel(musicStoreService), logger), "Add Accounts/Records");
+	musicStorePanel.add(new AddAccountsAndRecordsPanel(new AddAccountsSubPanel(musicStoreService, logger),
+		new AddRecordsSubPanel(musicStoreService, logger), logger), "Add Accounts/Records");
 
 	// Create and setup the add records to account panel, and attach to music store panel.
 	final AddRecordsToAccountPanel addRecordsToAccountPanel = new AddRecordsToAccountPanel(musicStoreService, logger);

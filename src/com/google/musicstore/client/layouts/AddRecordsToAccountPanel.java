@@ -89,7 +89,7 @@ public class AddRecordsToAccountPanel extends HorizontalPanel {
      *            a handle to the music store service
      */
     public void loadAccounts(final MusicStoreServiceAsync musicStoreService) {
-	final BlockAccountsPanel blockPanel = new BlockAccountsPanel();
+	final BlockAccountsPanel blockPanel = new BlockAccountsPanel(logger);
 	musicStoreService.getAccounts(new AsyncCallback<List<AccountDTO>>() {
 	    @Override
 	    public void onFailure(Throwable caught) {
@@ -120,7 +120,7 @@ public class AddRecordsToAccountPanel extends HorizontalPanel {
      *            a handle to the music store service
      */
     public void loadRecords(final MusicStoreServiceAsync musicStoreService) {
-	final BlockRecordsPanel blockPanel = new BlockRecordsPanel();
+	final BlockRecordsPanel blockPanel = new BlockRecordsPanel(logger);
 	musicStoreService.getRecords(new AsyncCallback<List<RecordDTO>>() {
 	    @Override
 	    public void onFailure(Throwable caught) {
