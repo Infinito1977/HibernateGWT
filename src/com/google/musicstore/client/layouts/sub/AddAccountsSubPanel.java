@@ -27,8 +27,7 @@ public class AddAccountsSubPanel extends VerticalPanel {
     public AddAccountsSubPanel(final MusicStoreServiceAsync musicStoreService, Logger parentLogger) {
 	logger = Logger.getLogger(this.getClass().getName());
 	logger.setParent(parentLogger);
-	// TODO: remove setSize?
-	setSize("500px", "200px");
+	setHeight("200px");
 	Label acctName = new Label("Account Name:");
 	final TextBox accountName = new TextBox();
 	Label acctPassword = new Label("Account Password:");

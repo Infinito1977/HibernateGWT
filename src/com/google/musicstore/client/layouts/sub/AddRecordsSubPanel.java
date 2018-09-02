@@ -25,8 +25,7 @@ public class AddRecordsSubPanel extends VerticalPanel {
     public AddRecordsSubPanel(final MusicStoreServiceAsync musicStoreService, Logger parentLogger) {
 	logger = Logger.getLogger(this.getClass().getName());
 	logger.setParent(parentLogger);
-	// TODO: remove setSize?
-	setSize("500px", "300px");
+	setHeight("300px");
 	Label recTitle = new Label("Record Title:");
 	final TextBox recordTitle = new TextBox();
 	Label recYear = new Label("Record Year:");
