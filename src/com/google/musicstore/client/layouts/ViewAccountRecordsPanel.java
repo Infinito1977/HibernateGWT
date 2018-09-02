@@ -52,7 +52,6 @@ public class ViewAccountRecordsPanel extends VerticalPanel {
      *            a handle to the music store service
      */
     public void loadAccountRecords(final MusicStoreServiceAsync musicStoreService) {
-	// TODO: blocking PopupWindow when receiving Account Records
 	// Retrieve the account records table and populate it with account / record data.
 	final FlexTable accountRecords = (FlexTable) getWidget(0);
 	musicStoreService.getAccounts(new AsyncCallback<List<AccountDTO>>() {
