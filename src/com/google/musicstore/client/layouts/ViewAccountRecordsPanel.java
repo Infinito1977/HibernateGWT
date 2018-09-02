@@ -99,7 +99,7 @@ public class ViewAccountRecordsPanel extends VerticalPanel {
 			index++;
 		    }
 		}
-		logger.info(result.size() + " accounts with records loaded");
+		logger.info(index - 1 + " accounts with records loaded");
 	    }
 	});
     }
