@@ -1,5 +1,7 @@
 package com.google.musicstore.client.layouts;
 
+import java.util.logging.Logger;
+
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.musicstore.client.MusicStoreServiceAsync;
@@ -10,12 +12,15 @@ import com.google.musicstore.client.layouts.widgets.generatedbentries.GenerateAc
 import com.google.musicstore.client.layouts.widgets.generatedbentries.GenerateRecordsButton;
 
 public class GenerateDBEntriesPanel extends FlexTable {
+    private static Logger logger;
     private final static int ACCOUNT_COUNT = 100;
     private final static int RECORD_COUNT = 1000;
     private final TextBox accountCountTB = new TextBox();
     private final TextBox recordCountTB = new TextBox();
 
-    public GenerateDBEntriesPanel(final MusicStoreServiceAsync musicStoreService) {
+    public GenerateDBEntriesPanel(final MusicStoreServiceAsync musicStoreService, Logger parentLogger) {
+	logger = Logger.getLogger(this.getClass().getName());
+	logger.setParent(parentLogger);
 	// Generate and delete accounts
 	accountCountTB.setText(new Integer(ACCOUNT_COUNT).toString());
 	setWidget(0, 0, new GenerateAccountsButton(musicStoreService, accountCountTB));
@@ -32,5 +37,6 @@ public class GenerateDBEntriesPanel extends FlexTable {
 	
 	// Generate links between accounts and records or delete them again
 	setWidget(2, 3, new DeleteAllAccountRecordsButton(musicStoreService));
+	logger.finer("Panel <<Generate DB Entries>> initialized");
     }
 }

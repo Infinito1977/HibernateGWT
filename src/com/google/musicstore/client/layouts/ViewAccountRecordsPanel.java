@@ -2,6 +2,7 @@ package com.google.musicstore.client.layouts;
 
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -20,7 +21,11 @@ import com.google.musicstore.client.dto.RecordDTO;
  *            a handle to the music store service
  */
 public class ViewAccountRecordsPanel extends VerticalPanel {
-    public ViewAccountRecordsPanel() {
+    private static Logger logger;
+
+    public ViewAccountRecordsPanel(Logger parentLogger) {
+	logger = Logger.getLogger(this.getClass().getName());
+	logger.setParent(parentLogger);
 	setSize("650px", "500px");
 	setBorderWidth(1);
 
@@ -35,6 +40,7 @@ public class ViewAccountRecordsPanel extends VerticalPanel {
 
 	// Add the table and load all accounts and their records into it.
 	add(accountRecords);
+	logger.finer("Panel <<View Account Records>> initialized");
     }
 
     /**
@@ -54,6 +60,7 @@ public class ViewAccountRecordsPanel extends VerticalPanel {
 	    @Override
 	    public void onFailure(Throwable caught) {
 		Window.alert("Failed to get accounts and records.");
+		logger.severe(caught.getLocalizedMessage());
 	    }
 
 	    @Override
@@ -62,9 +69,9 @@ public class ViewAccountRecordsPanel extends VerticalPanel {
 		    return;
 
 		/*
-		 * Fill the account / records table with accounts and their records. Clear all cells except the first row (reserved for
-		 * headers) and only show the account id once with each record title listed under it. This could be improved to only
-		 * show new entries, while keeping old entries in the table.
+		 * Fill the account / records table with accounts and their records. Clear all cells except the first row
+		 * (reserved for headers) and only show the account id once with each record title listed under it. This could be
+		 * improved to only show new entries, while keeping old entries in the table.
 		 */
 		for (int i = accountRecords.getRowCount() - 1; i > 0; i--) {
 		    if (accountRecords.isCellPresent(i, 0)) {
@@ -92,6 +99,7 @@ public class ViewAccountRecordsPanel extends VerticalPanel {
 			index++;
 		    }
 		}
+		logger.info(result.size() + " accounts with records loaded");
 	    }
 	});
     }

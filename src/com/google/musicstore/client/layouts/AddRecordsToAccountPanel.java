@@ -1,6 +1,7 @@
 package com.google.musicstore.client.layouts;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -17,6 +18,8 @@ import com.google.musicstore.client.layouts.sub.BlockAccountsPanel;
 import com.google.musicstore.client.layouts.sub.BlockRecordsPanel;
 
 public class AddRecordsToAccountPanel extends HorizontalPanel {
+    private static Logger logger;
+
     /**
      * Constructs the records to account panel widgets and adds them to the panel.
      * 
@@ -25,7 +28,9 @@ public class AddRecordsToAccountPanel extends HorizontalPanel {
      * @param musicStoreService
      *            a handle to the music store service
      */
-    public AddRecordsToAccountPanel(final MusicStoreServiceAsync musicStoreService) {
+    public AddRecordsToAccountPanel(final MusicStoreServiceAsync musicStoreService, Logger parentLogger) {
+	logger = Logger.getLogger(this.getClass().getName());
+	logger.setParent(parentLogger);
 	setSize("650px", "500px");
 	setBorderWidth(1);
 
@@ -72,6 +77,7 @@ public class AddRecordsToAccountPanel extends HorizontalPanel {
 	    }
 	});
 	add(addRecord);
+	logger.finer("Panel <<Add Records To Accounts>> initialized");
     }
 
     /**
@@ -89,6 +95,7 @@ public class AddRecordsToAccountPanel extends HorizontalPanel {
 	    public void onFailure(Throwable caught) {
 		blockPanel.setVisible(false);
 		Window.alert("Failed to retrieve accounts.");
+		logger.severe(caught.getLocalizedMessage());
 	    }
 
 	    @Override
@@ -99,6 +106,7 @@ public class AddRecordsToAccountPanel extends HorizontalPanel {
 		    accountIds.addItem(String.valueOf(account.getName()), String.valueOf(account.getId()));
 		}
 		blockPanel.setVisible(false);
+		logger.info(result.size() + " accounts loaded");
 	    }
 	});
     }
@@ -118,6 +126,7 @@ public class AddRecordsToAccountPanel extends HorizontalPanel {
 	    public void onFailure(Throwable caught) {
 		blockPanel.setVisible(false);
 		Window.alert("Failed to retrieve records.");
+		logger.severe(caught.getLocalizedMessage());
 	    }
 
 	    @Override
@@ -129,6 +138,7 @@ public class AddRecordsToAccountPanel extends HorizontalPanel {
 		    recordTitles.addItem(record.getTitle(), String.valueOf(record.getId()));
 		}
 		blockPanel.setVisible(false);
+		logger.info(result.size() + " records loaded");
 	    }
 	});
     }

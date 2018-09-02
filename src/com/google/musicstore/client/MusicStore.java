@@ -1,5 +1,8 @@
 package com.google.musicstore.client;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.SelectionEvent;
@@ -18,11 +21,15 @@ import com.google.musicstore.client.layouts.sub.AddRecordsSubPanel;
  * services.
  */
 public class MusicStore implements EntryPoint {
+    private static Logger logger;
+    
+    public MusicStore() {
+	logger = Logger.getLogger(this.getClass().getName());
+	logger.setLevel(Level.FINER);
+    }
 
-    /**
-     * The standard entry point onModuleLoad() method.
-     */
     public void onModuleLoad() {
+	logger.fine("Musicstore starting");
 	/*
 	 * Create the tab panel that will contain the three necessary views: (1) Add Accounts / Records: to add new accounts /
 	 * records (2) Add Records To Account: to add existing records to existing accounts (3) View Account Records: to view
@@ -35,20 +42,19 @@ public class MusicStore implements EntryPoint {
 	final MusicStoreServiceAsync musicStoreService = (MusicStoreServiceAsync) GWT.create(MusicStoreService.class);
 
 	// Connect the creation panel pieces together, and attach to music store panel.
-	musicStorePanel.add(
-		new AddAccountsAndRecordsPanel(new AddAccountsSubPanel(musicStoreService), new AddRecordsSubPanel(musicStoreService)),
-		"Add Accounts/Records");
+	musicStorePanel.add(new AddAccountsAndRecordsPanel(new AddAccountsSubPanel(musicStoreService),
+		new AddRecordsSubPanel(musicStoreService), logger), "Add Accounts/Records");
 
 	// Create and setup the add records to account panel, and attach to music store panel.
-	final AddRecordsToAccountPanel addRecordsToAccountPanel = new AddRecordsToAccountPanel(musicStoreService);
+	final AddRecordsToAccountPanel addRecordsToAccountPanel = new AddRecordsToAccountPanel(musicStoreService, logger);
 	musicStorePanel.add(addRecordsToAccountPanel, "Add Records To Account");
 
 	// Create and setup the view account records panel, and attach to music store panel.
-	final ViewAccountRecordsPanel viewAccountRecordsPanel = new ViewAccountRecordsPanel();
+	final ViewAccountRecordsPanel viewAccountRecordsPanel = new ViewAccountRecordsPanel(logger);
 	musicStorePanel.add(viewAccountRecordsPanel, "View Account Records");
 
 	// Add panel to generate DB entries
-	musicStorePanel.add(new GenerateDBEntriesPanel(musicStoreService), "Generate DB Entries");
+	musicStorePanel.add(new GenerateDBEntriesPanel(musicStoreService, logger), "Generate DB Entries");
 
 	/*
 	 * When one of the tabs containing accounts or records to be displayed is selected, we have to load the new accounts /
@@ -79,5 +85,6 @@ public class MusicStore implements EntryPoint {
 
 	// Attach the music store panel to the page.
 	RootPanel.get().add(musicStorePanel);
+	logger.info("Musicstore started successfully");
     }
 }
