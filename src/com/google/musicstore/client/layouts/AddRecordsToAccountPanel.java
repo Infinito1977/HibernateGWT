@@ -28,10 +28,10 @@ public class AddRecordsToAccountPanel extends HorizontalPanel {
      * @param musicStoreService
      *            a handle to the music store service
      */
-    public AddRecordsToAccountPanel(final MusicStoreServiceAsync musicStoreService, Logger parentLogger) {
+    public AddRecordsToAccountPanel(final MusicStoreServiceAsync musicStoreService, String width, Logger parentLogger) {
 	logger = Logger.getLogger(this.getClass().getName());
 	logger.setParent(parentLogger);
-	setSize("650px", "500px");
+	setSize(width, "500px");
 	setBorderWidth(1);
 
 	// Setup and connect the record to account panel.

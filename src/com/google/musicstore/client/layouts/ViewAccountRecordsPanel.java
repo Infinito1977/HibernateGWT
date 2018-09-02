@@ -23,10 +23,10 @@ import com.google.musicstore.client.dto.RecordDTO;
 public class ViewAccountRecordsPanel extends VerticalPanel {
     private static Logger logger;
 
-    public ViewAccountRecordsPanel(Logger parentLogger) {
+    public ViewAccountRecordsPanel(String width, Logger parentLogger) {
 	logger = Logger.getLogger(this.getClass().getName());
 	logger.setParent(parentLogger);
-	setSize("650px", "500px");
+	setSize(width, "500px");
 	setBorderWidth(1);
 
 	// Setup the account records table along with headers.

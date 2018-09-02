@@ -10,10 +10,10 @@ import com.google.musicstore.client.layouts.sub.AddRecordsSubPanel;
 public class AddAccountsAndRecordsPanel extends VerticalPanel {
     private static Logger logger;
 
-    public AddAccountsAndRecordsPanel(MusicStoreServiceAsync musicStoreService, Logger parentLogger) {
+    public AddAccountsAndRecordsPanel(MusicStoreServiceAsync musicStoreService, String width, Logger parentLogger) {
 	logger = Logger.getLogger(this.getClass().getName());
 	logger.setParent(parentLogger);
-	setSize("650px", "500px");
+	setSize(width, "500px");
 	setBorderWidth(1);
 	add(new AddAccountsSubPanel(musicStoreService, logger));
 	add(new AddRecordsSubPanel(musicStoreService, logger));

@@ -20,6 +20,7 @@ import com.google.musicstore.client.layouts.ViewAccountRecordsPanel;
  */
 public class MusicStore implements EntryPoint {
     private static Logger logger;
+    private static final String WIDTH = "650px";
     
     public MusicStore() {
 	logger = Logger.getLogger(this.getClass().getName());
@@ -41,18 +42,18 @@ public class MusicStore implements EntryPoint {
 	final MusicStoreServiceAsync musicStoreService = (MusicStoreServiceAsync) GWT.create(MusicStoreService.class);
 
 	// Connect the creation panel pieces together, and attach to music store panel.
-	musicStorePanel.add(new AddAccountsAndRecordsPanel(musicStoreService, logger), "Add Accounts/Records");
+	musicStorePanel.add(new AddAccountsAndRecordsPanel(musicStoreService, WIDTH, logger), "Add Accounts/Records");
 
 	// Create and setup the add records to account panel, and attach to music store panel.
-	final AddRecordsToAccountPanel addRecordsToAccountPanel = new AddRecordsToAccountPanel(musicStoreService, logger);
+	final AddRecordsToAccountPanel addRecordsToAccountPanel = new AddRecordsToAccountPanel(musicStoreService, WIDTH, logger);
 	musicStorePanel.add(addRecordsToAccountPanel, "Add Records To Account");
 
 	// Create and setup the view account records panel, and attach to music store panel.
-	final ViewAccountRecordsPanel viewAccountRecordsPanel = new ViewAccountRecordsPanel(logger);
+	final ViewAccountRecordsPanel viewAccountRecordsPanel = new ViewAccountRecordsPanel(WIDTH, logger);
 	musicStorePanel.add(viewAccountRecordsPanel, "View Account Records");
 
 	// Add panel to generate DB entries
-	musicStorePanel.add(new GenerateDBEntriesPanel(musicStoreService, logger), "Generate DB Entries");
+	musicStorePanel.add(new GenerateDBEntriesPanel(musicStoreService, WIDTH, logger), "Generate DB Entries");
 
 	/*
 	 * When one of the tabs containing accounts or records to be displayed is selected, we have to load the new accounts /

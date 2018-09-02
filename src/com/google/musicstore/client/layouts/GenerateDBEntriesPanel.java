@@ -18,9 +18,10 @@ public class GenerateDBEntriesPanel extends FlexTable {
     private final TextBox accountCountTB = new TextBox();
     private final TextBox recordCountTB = new TextBox();
 
-    public GenerateDBEntriesPanel(final MusicStoreServiceAsync musicStoreService, Logger parentLogger) {
+    public GenerateDBEntriesPanel(final MusicStoreServiceAsync musicStoreService, String width, Logger parentLogger) {
 	logger = Logger.getLogger(this.getClass().getName());
 	logger.setParent(parentLogger);
+	setWidth(width);
 	// Generate and delete accounts
 	accountCountTB.setText(new Integer(ACCOUNT_COUNT).toString());
 	setWidget(0, 0, new GenerateAccountsButton(musicStoreService, accountCountTB, logger));
