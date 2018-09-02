@@ -19,12 +19,14 @@ import com.google.musicstore.client.layouts.ViewAccountRecordsPanel;
  * services.
  */
 public class MusicStore implements EntryPoint {
+    // TODO: File logging
+    // TODO: Server logging
     private static Logger logger;
     private static final String WIDTH = "650px";
     
     public MusicStore() {
 	logger = Logger.getLogger(this.getClass().getName());
-	// TODO: Remove log level here
+	// TODO: Remove log level here (get from DB)
 	logger.setLevel(Level.FINEST);
     }
 
