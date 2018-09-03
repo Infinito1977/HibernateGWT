@@ -36,6 +36,8 @@ public class MusicStoreServiceImpl extends RemoteServiceServlet implements Music
 	LogLevel logLevel = new LogLevel(logLevelDTO);
 	Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 	session.beginTransaction();
+	Query query = session.createQuery("delete LogLevel");
+	query.executeUpdate();
 	session.save(logLevel);
 	session.getTransaction().commit();
     }
