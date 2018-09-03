@@ -4,9 +4,12 @@ import java.util.List;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.musicstore.client.dto.AccountDTO;
+import com.google.musicstore.client.dto.LogLevelDTO;
 import com.google.musicstore.client.dto.RecordDTO;
 
 public interface MusicStoreServiceAsync {
+    public void saveLogLevel(LogLevelDTO logLevel, AsyncCallback<Void> callback);
+    
     public void getAccounts(AsyncCallback<List<AccountDTO>> callback);
 
     public void getRecords(AsyncCallback<List<RecordDTO>> callback);

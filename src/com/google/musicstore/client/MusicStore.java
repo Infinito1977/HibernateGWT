@@ -10,9 +10,11 @@ import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TabPanel;
 import com.google.musicstore.client.layouts.AddRecordsToAccountPanel;
+import com.google.musicstore.client.dto.LogLevelDTO;
 import com.google.musicstore.client.layouts.AddAccountsAndRecordsPanel;
 import com.google.musicstore.client.layouts.GenerateDBEntriesPanel;
 import com.google.musicstore.client.layouts.ViewAccountRecordsPanel;
+import com.google.musicstore.client.util.LogLevelManager;
 
 /**
  * A overly simplified music store interface to retrieve and view music store accounts and records using GWT RPC
@@ -27,7 +29,8 @@ public class MusicStore implements EntryPoint {
     public MusicStore() {
 	logger = Logger.getLogger(this.getClass().getName());
 	// TODO: Remove log level here (get from DB)
-	logger.setLevel(Level.FINEST);
+	logger.setLevel(Level.INFO);
+	
     }
 
     public void onModuleLoad() {
@@ -42,6 +45,7 @@ public class MusicStore implements EntryPoint {
 	// Create the music store RPC service interface to be used by all
 	// components.
 	final MusicStoreServiceAsync musicStoreService = (MusicStoreServiceAsync) GWT.create(MusicStoreService.class);
+	LogLevelManager.saveLogLevel(new LogLevelDTO(Level.INFO), logger, musicStoreService);
 
 	// Connect the creation panel pieces together, and attach to music store panel.
 	musicStorePanel.add(new AddAccountsAndRecordsPanel(musicStoreService, WIDTH, logger), "Add Accounts/Records");

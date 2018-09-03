@@ -12,13 +12,33 @@ import org.hibernate.Session;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.google.musicstore.client.MusicStoreService;
 import com.google.musicstore.client.dto.AccountDTO;
+import com.google.musicstore.client.dto.LogLevelDTO;
 import com.google.musicstore.client.dto.RecordDTO;
 import com.google.musicstore.domain.Account;
+import com.google.musicstore.domain.LogLevel;
 import com.google.musicstore.domain.Record;
 import com.google.musicstore.util.HibernateUtil;
 
 public class MusicStoreServiceImpl extends RemoteServiceServlet implements MusicStoreService {
     private static final long serialVersionUID = -4825786932285819100L;
+
+//    @Override
+//    public Level loadLogLevel() {
+//	Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+//	session.beginTransaction();
+//	Level logLevel = session.createQuery("from Level");
+//	session.getTransaction().commit();
+//	return null;
+//    }
+    
+    @Override
+    public void saveLogLevel(LogLevelDTO logLevelDTO) {
+	LogLevel logLevel = new LogLevel(logLevelDTO);
+	Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+	session.beginTransaction();
+	session.save(logLevel);
+	session.getTransaction().commit();
+    }
 
     @Override
     public List<AccountDTO> getAccounts() {
