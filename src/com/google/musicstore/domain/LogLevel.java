@@ -15,7 +15,7 @@ public class LogLevel implements Serializable {
     
     public LogLevel(LogLevelDTO logLevelDTO) {
 	this();
-	value = logLevelDTO.getLogLevel();
+	value = logLevelDTO.getValue();
     }
     
     public String getValue() {

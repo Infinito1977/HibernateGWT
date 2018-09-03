@@ -13,11 +13,11 @@ public class LogLevelDTO implements Serializable {
 	value = logLevel.toString();
     }
     
-    public String getLogLevel() {
+    public String getValue() {
 	return value;
     }
 
-    public void setLogLevel(String logLevel) {
+    public void setValue(String logLevel) {
 	value = logLevel;
     }
     
