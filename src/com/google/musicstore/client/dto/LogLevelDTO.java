@@ -20,4 +20,9 @@ public class LogLevelDTO implements Serializable {
     public void setLogLevel(String logLevel) {
 	value = logLevel;
     }
+    
+    @Override
+    public String toString() {
+	return value;
+    }
 }
