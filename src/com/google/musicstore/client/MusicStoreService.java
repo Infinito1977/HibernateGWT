@@ -10,6 +10,8 @@ import com.google.musicstore.client.dto.RecordDTO;
 
 @RemoteServiceRelativePath("musicservice")
 public interface MusicStoreService extends RemoteService {
+    public LogLevelDTO loadLogLevel();
+
     public void saveLogLevel(LogLevelDTO logLevel);
 
     public List<AccountDTO> getAccounts();

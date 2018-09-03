@@ -1,6 +1,5 @@
 package com.google.musicstore.client;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -10,7 +9,6 @@ import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TabPanel;
 import com.google.musicstore.client.layouts.AddRecordsToAccountPanel;
-import com.google.musicstore.client.dto.LogLevelDTO;
 import com.google.musicstore.client.layouts.AddAccountsAndRecordsPanel;
 import com.google.musicstore.client.layouts.GenerateDBEntriesPanel;
 import com.google.musicstore.client.layouts.ViewAccountRecordsPanel;
@@ -22,7 +20,6 @@ import com.google.musicstore.client.util.LogLevelManager;
  */
 public class MusicStore implements EntryPoint {
     // TODO: File logging
-    // TODO: Server logging
     // Create the music store RPC service interface to be used by all components.
     private final MusicStoreServiceAsync musicStoreService = (MusicStoreServiceAsync) GWT.create(MusicStoreService.class);
     private static Logger logger;
@@ -30,8 +27,7 @@ public class MusicStore implements EntryPoint {
 
     public MusicStore() {
 	logger = Logger.getLogger(this.getClass().getName());
-	// TODO: Remove log level here (get from DB)
-	logger.setLevel(Level.INFO);
+	LogLevelManager.setLogLevel(logger, musicStoreService);
 
     }
 

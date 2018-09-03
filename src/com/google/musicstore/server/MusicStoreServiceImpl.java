@@ -22,14 +22,14 @@ import com.google.musicstore.util.HibernateUtil;
 public class MusicStoreServiceImpl extends RemoteServiceServlet implements MusicStoreService {
     private static final long serialVersionUID = -4825786932285819100L;
 
-//    @Override
-//    public Level loadLogLevel() {
-//	Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-//	session.beginTransaction();
-//	Level logLevel = session.createQuery("from Level");
-//	session.getTransaction().commit();
-//	return null;
-//    }
+    @Override
+    public LogLevelDTO loadLogLevel() {
+	Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+	session.beginTransaction();
+	LogLevel logLevel = (LogLevel) session.get(LogLevel.class, new Long(0));
+	session.getTransaction().commit();
+	return new LogLevelDTO(logLevel.getLevel());
+    }
     
     @Override
     public void saveLogLevel(LogLevelDTO logLevelDTO) {

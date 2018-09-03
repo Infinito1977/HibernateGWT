@@ -1,6 +1,7 @@
 package com.google.musicstore.domain;
 
 import java.io.Serializable;
+import java.util.logging.Level;
 
 import com.google.musicstore.client.dto.LogLevelDTO;
 
@@ -16,6 +17,10 @@ public class LogLevel implements Serializable {
     public LogLevel(LogLevelDTO logLevelDTO) {
 	this();
 	value = logLevelDTO.getValue();
+    }
+    
+    public Level getLevel() {
+	return Level.parse(value);
     }
     
     public String getValue() {
