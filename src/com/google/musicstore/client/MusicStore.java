@@ -23,11 +23,20 @@ public class MusicStore implements EntryPoint {
     // TODO: Server logging
     private static Logger logger;
     private static final String WIDTH = "650px";
-    
+
     public MusicStore() {
 	logger = Logger.getLogger(this.getClass().getName());
 	// TODO: Remove log level here (get from DB)
-	logger.setLevel(Level.FINEST);
+	try {
+	    RootPanel rootPanel = RootPanel.get("loglevel");
+	    if (rootPanel != null)
+		logger.setLevel(Level.parse(RootPanel.get("loglevel").getTitle()));
+	    else
+		logger.warning("Log level is not set in index.html, using INFO");
+	} catch (IllegalArgumentException ex) {
+	    logger.warning("Illegal level in index.html");
+	    logger.warning(ex.getLocalizedMessage());
+	}
     }
 
     public void onModuleLoad() {
