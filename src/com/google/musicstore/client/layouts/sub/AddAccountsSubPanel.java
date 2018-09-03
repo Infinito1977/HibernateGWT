@@ -14,7 +14,7 @@ import com.google.musicstore.client.MusicStoreServiceAsync;
 import com.google.musicstore.client.dto.AccountDTO;
 
 public class AddAccountsSubPanel extends VerticalPanel {
-    private static Logger logger;
+    private Logger logger = Logger.getLogger(getClass().getName());
 
     /**
      * Constructs the add account panel widgets and adds them to the panel.
@@ -25,7 +25,6 @@ public class AddAccountsSubPanel extends VerticalPanel {
      *            a handle to the music store service
      */
     public AddAccountsSubPanel(final MusicStoreServiceAsync musicStoreService, Logger parentLogger) {
-	logger = Logger.getLogger(this.getClass().getName());
 	logger.setParent(parentLogger);
 	setHeight("200px");
 	Label acctName = new Label("Account Name:");
@@ -38,6 +37,7 @@ public class AddAccountsSubPanel extends VerticalPanel {
 	addAccount.addClickHandler(new ClickHandler() {
 	    @Override
 	    public void onClick(ClickEvent event) {
+		logger.fine("<<Add Accounts/Records>>: User clicked <Add Accounts>");
 		AccountDTO account = new AccountDTO();
 		account.setName(accountName.getText());
 		account.setPassword(accountPassword.getText());

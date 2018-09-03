@@ -14,7 +14,7 @@ import com.google.musicstore.client.MusicStoreServiceAsync;
 import com.google.musicstore.client.dto.RecordDTO;
 
 public class AddRecordsSubPanel extends VerticalPanel {
-    private static Logger logger;
+    private Logger logger = Logger.getLogger(getClass().getName());
 
     /**
      * Constructs the add record panel widgets and adds them to the panel.
@@ -23,7 +23,6 @@ public class AddRecordsSubPanel extends VerticalPanel {
      *            a handle to the music store service
      */
     public AddRecordsSubPanel(final MusicStoreServiceAsync musicStoreService, Logger parentLogger) {
-	logger = Logger.getLogger(this.getClass().getName());
 	logger.setParent(parentLogger);
 	setHeight("300px");
 	Label recTitle = new Label("Record Title:");
@@ -38,6 +37,7 @@ public class AddRecordsSubPanel extends VerticalPanel {
 	addRecord.addClickHandler(new ClickHandler() {
 	    @Override
 	    public void onClick(ClickEvent event) {
+		logger.fine("<<Add Accounts/Records>>: User clicked <Add Record>");
 		RecordDTO record = new RecordDTO();
 		record.setTitle(recordTitle.getText());
 		record.setYear(Integer.valueOf(recordYear.getText()));

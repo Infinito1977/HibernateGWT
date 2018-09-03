@@ -21,7 +21,7 @@ import com.google.musicstore.client.layouts.ViewAccountRecordsPanel;
 public class MusicStore implements EntryPoint {
     // TODO: File logging
     // TODO: Server logging
-    private static Logger logger;
+    private Logger logger = Logger.getLogger(getClass().getName());
     private static final String WIDTH = "650px";
 
     public MusicStore() {
@@ -40,7 +40,6 @@ public class MusicStore implements EntryPoint {
     }
 
     public void onModuleLoad() {
-	logger.fine("Musicstore starting");
 	/*
 	 * Create the tab panel that will contain the three necessary views: (1) Add Accounts / Records: to add new accounts /
 	 * records (2) Add Records To Account: to add existing records to existing accounts (3) View Account Records: to view
@@ -77,13 +76,19 @@ public class MusicStore implements EntryPoint {
 		int selected = event.getSelectedItem();
 		switch (selected) {
 		case 0:
+		    logger.fine("User activated tab <<Add Accounts/Records>>");
 		    break;
 		case 1:
+		    logger.fine("User activated tab <<Add Records To Account>>");
 		    addRecordsToAccountPanel.loadAccounts(musicStoreService);
 		    addRecordsToAccountPanel.loadRecords(musicStoreService);
 		    break;
 		case 2:
+		    logger.fine("User activated tab <<View Account Records>>");
 		    viewAccountRecordsPanel.loadAccountRecords(musicStoreService);
+		    break;
+		case 3:
+		    logger.fine("User activated tab <<Generate DB Entries>>");
 		    break;
 		}
 

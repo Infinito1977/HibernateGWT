@@ -13,7 +13,7 @@ import com.google.musicstore.client.dto.RecordDTO;
 import com.google.musicstore.client.layouts.sub.BlockRecordsPanel;
 
 public class GenerateRecordsButton extends Button {
-    private static Logger logger;
+    private Logger logger = Logger.getLogger(getClass().getName());
 
     public GenerateRecordsButton(final MusicStoreServiceAsync musicStoreService, final TextBox recordCountTB,
 	    Logger parentLogger) {
@@ -23,7 +23,7 @@ public class GenerateRecordsButton extends Button {
 	addClickHandler(new ClickHandler() {
 	    @Override
 	    public void onClick(ClickEvent event) {
-		logger.info("GenerateRecordsButton clicked");
+		logger.fine("<<Generate DB Entries>>: User clicked <Generate> (Records)");
 		final BlockRecordsPanel blockRecordsPanel = new BlockRecordsPanel("Saving records", logger);
 		int recordCount = new Integer(recordCountTB.getValue());
 		RecordDTO[] recordsDTO = new RecordDTO[recordCount];

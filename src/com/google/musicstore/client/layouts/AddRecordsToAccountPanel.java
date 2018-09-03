@@ -18,7 +18,7 @@ import com.google.musicstore.client.layouts.sub.BlockAccountsPanel;
 import com.google.musicstore.client.layouts.sub.BlockRecordsPanel;
 
 public class AddRecordsToAccountPanel extends HorizontalPanel {
-    private static Logger logger;
+    private Logger logger = Logger.getLogger(getClass().getName());
 
     /**
      * Constructs the records to account panel widgets and adds them to the panel.
@@ -29,7 +29,6 @@ public class AddRecordsToAccountPanel extends HorizontalPanel {
      *            a handle to the music store service
      */
     public AddRecordsToAccountPanel(final MusicStoreServiceAsync musicStoreService, String width, Logger parentLogger) {
-	logger = Logger.getLogger(this.getClass().getName());
 	logger.setParent(parentLogger);
 	setSize(width, "500px");
 	setBorderWidth(1);
@@ -54,6 +53,7 @@ public class AddRecordsToAccountPanel extends HorizontalPanel {
 	addRecord.addClickHandler(new ClickHandler() {
 	    @Override
 	    public void onClick(ClickEvent event) {
+		logger.fine("<<Add Records To Account>>: User clicked <Add Record>");
 		int accountIndex = accountIds.getSelectedIndex();
 		int recordIndex = recordTitles.getSelectedIndex();
 		Long accountId = new Long(accountIds.getValue(accountIndex));

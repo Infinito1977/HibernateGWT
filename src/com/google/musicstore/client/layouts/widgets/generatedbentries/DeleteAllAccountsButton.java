@@ -10,15 +10,15 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.musicstore.client.MusicStoreServiceAsync;
 
 public class DeleteAllAccountsButton extends Button {
-    private static Logger logger;
+    private Logger logger = Logger.getLogger(getClass().getName());
 
     public DeleteAllAccountsButton(final MusicStoreServiceAsync musicStoreService, Logger parentLogger) {
 	super("Delete All");
-	logger = Logger.getLogger(this.getClass().getName());
 	logger.setParent(parentLogger);
 	addClickHandler(new ClickHandler() {
 	    @Override
 	    public void onClick(ClickEvent event) {
+		logger.fine("<<Generate DB Entries>>: User clicked <Delete All> (Accounts)");
 		musicStoreService.deleteAccounts(new AsyncCallback<Integer>() {
 		    @Override
 		    public void onFailure(Throwable caught) {
