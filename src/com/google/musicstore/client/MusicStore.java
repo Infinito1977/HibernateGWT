@@ -12,7 +12,6 @@ import com.google.musicstore.client.layouts.AddRecordsToAccountPanel;
 import com.google.musicstore.client.layouts.AddAccountsAndRecordsPanel;
 import com.google.musicstore.client.layouts.GenerateDBEntriesPanel;
 import com.google.musicstore.client.layouts.ViewAccountRecordsPanel;
-import com.google.musicstore.client.util.LogLevelManager;
 
 /**
  * A overly simplified music store interface to retrieve and view music store accounts and records using GWT RPC
@@ -27,7 +26,7 @@ public class MusicStore implements EntryPoint {
 
     public MusicStore() {
 	logger = Logger.getLogger(this.getClass().getName());
-	LogLevelManager.setLogLevel(logger, musicStoreService);
+//	logger.setLevel(Level.FINE);
 
     }
 
