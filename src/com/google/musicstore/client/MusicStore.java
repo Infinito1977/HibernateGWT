@@ -23,14 +23,16 @@ import com.google.musicstore.client.util.LogLevelManager;
 public class MusicStore implements EntryPoint {
     // TODO: File logging
     // TODO: Server logging
+    // Create the music store RPC service interface to be used by all components.
+    private final MusicStoreServiceAsync musicStoreService = (MusicStoreServiceAsync) GWT.create(MusicStoreService.class);
     private static Logger logger;
     private static final String WIDTH = "650px";
-    
+
     public MusicStore() {
 	logger = Logger.getLogger(this.getClass().getName());
 	// TODO: Remove log level here (get from DB)
 	logger.setLevel(Level.INFO);
-	
+
     }
 
     public void onModuleLoad() {
@@ -41,11 +43,6 @@ public class MusicStore implements EntryPoint {
 	 * existing accounts and their records.
 	 */
 	final TabPanel musicStorePanel = new TabPanel();
-
-	// Create the music store RPC service interface to be used by all
-	// components.
-	final MusicStoreServiceAsync musicStoreService = (MusicStoreServiceAsync) GWT.create(MusicStoreService.class);
-	LogLevelManager.saveLogLevel(new LogLevelDTO(Level.INFO), logger, musicStoreService);
 
 	// Connect the creation panel pieces together, and attach to music store panel.
 	musicStorePanel.add(new AddAccountsAndRecordsPanel(musicStoreService, WIDTH, logger), "Add Accounts/Records");
