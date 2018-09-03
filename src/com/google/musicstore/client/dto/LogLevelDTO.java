@@ -5,19 +5,19 @@ import java.util.logging.Level;
 
 public class LogLevelDTO implements Serializable {
     private static final long serialVersionUID = 1344632806748630863L;
-    private String logLevel;
+    private String value;
     
     public LogLevelDTO() {}
     
     public LogLevelDTO(Level logLevel) {
-	this.logLevel = logLevel.toString();
+	value = logLevel.toString();
     }
     
     public String getLogLevel() {
-	return logLevel;
+	return value;
     }
 
     public void setLogLevel(String logLevel) {
-	this.logLevel = logLevel;
+	value = logLevel;
     }
 }
