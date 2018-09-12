@@ -11,8 +11,8 @@ import org.hibernate.Session;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.google.musicstore.client.MusicStoreService;
-import com.google.musicstore.client.dto.AccountDTO;
-import com.google.musicstore.client.dto.RecordDTO;
+import com.google.musicstore.client.model.AccountDTO;
+import com.google.musicstore.client.model.RecordDTO;
 import com.google.musicstore.server.model.Account;
 import com.google.musicstore.server.model.Record;
 import com.google.musicstore.util.HibernateUtil;

@@ -9,8 +9,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.musicstore.client.MusicStoreServiceAsync;
-import com.google.musicstore.client.dto.RecordDTO;
 import com.google.musicstore.client.layouts.sub.BlockRecordsPanel;
+import com.google.musicstore.client.model.RecordDTO;
 
 public class GenerateRecordsButton extends Button {
     private Logger logger = Logger.getLogger(getClass().getName());

@@ -2,7 +2,7 @@ package com.google.musicstore.server.model;
 
 import java.io.Serializable;
 
-import com.google.musicstore.client.dto.RecordDTO;
+import com.google.musicstore.client.model.RecordDTO;
 
 public class Record implements Serializable {
     private static final long serialVersionUID = -6362169702509407309L;

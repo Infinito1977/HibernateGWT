@@ -11,7 +11,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.musicstore.client.MusicStoreServiceAsync;
-import com.google.musicstore.client.dto.RecordDTO;
+import com.google.musicstore.client.model.RecordDTO;
 
 public class AddRecordsSubPanel extends VerticalPanel {
     private Logger logger = Logger.getLogger(getClass().getName());

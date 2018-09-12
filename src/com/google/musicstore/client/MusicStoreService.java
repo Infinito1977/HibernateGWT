@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-import com.google.musicstore.client.dto.AccountDTO;
-import com.google.musicstore.client.dto.RecordDTO;
+import com.google.musicstore.client.model.AccountDTO;
+import com.google.musicstore.client.model.RecordDTO;
 
 @RemoteServiceRelativePath("musicservice")
 public interface MusicStoreService extends RemoteService {
