@@ -9,8 +9,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.musicstore.client.MusicStoreServiceAsync;
-import com.google.musicstore.client.dto.AccountDTO;
-import com.google.musicstore.client.dto.RecordDTO;
+import com.google.musicstore.client.model.AccountDTO;
+import com.google.musicstore.client.model.RecordDTO;
 
 /**
  * Constructs the view account / records panel widgets and adds them to the panel.

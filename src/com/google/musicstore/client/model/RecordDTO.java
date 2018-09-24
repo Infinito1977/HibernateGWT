@@ -1,4 +1,4 @@
-package com.google.musicstore.client.dto;
+package com.google.musicstore.client.model;
 
 import java.io.Serializable;
 

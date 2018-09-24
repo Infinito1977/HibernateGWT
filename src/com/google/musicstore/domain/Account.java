@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.google.musicstore.client.dto.AccountDTO;
-import com.google.musicstore.client.dto.RecordDTO;
+import com.google.musicstore.client.model.AccountDTO;
+import com.google.musicstore.client.model.RecordDTO;
 
 public class Account implements Serializable {
     private static final long serialVersionUID = 7973009858403497681L;

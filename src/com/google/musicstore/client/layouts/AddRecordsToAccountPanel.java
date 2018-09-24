@@ -12,10 +12,10 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.musicstore.client.MusicStoreServiceAsync;
-import com.google.musicstore.client.dto.AccountDTO;
-import com.google.musicstore.client.dto.RecordDTO;
 import com.google.musicstore.client.layouts.sub.BlockAccountsPanel;
 import com.google.musicstore.client.layouts.sub.BlockRecordsPanel;
+import com.google.musicstore.client.model.AccountDTO;
+import com.google.musicstore.client.model.RecordDTO;
 
 public class AddRecordsToAccountPanel extends HorizontalPanel {
     private Logger logger = Logger.getLogger(getClass().getName());
