@@ -13,8 +13,8 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.google.musicstore.client.MusicStoreService;
 import com.google.musicstore.client.model.AccountDTO;
 import com.google.musicstore.client.model.RecordDTO;
-import com.google.musicstore.domain.Account;
-import com.google.musicstore.domain.Record;
+import com.google.musicstore.server.model.Account;
+import com.google.musicstore.server.model.Record;
 import com.google.musicstore.util.HibernateUtil;
 
 public class MusicStoreServiceImpl extends RemoteServiceServlet implements MusicStoreService {

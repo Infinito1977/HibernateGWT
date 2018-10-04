@@ -1,4 +1,4 @@
-package com.google.musicstore.domain;
+package com.google.musicstore.server.model;
 
 import java.io.Serializable;
 
