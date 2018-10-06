@@ -24,7 +24,7 @@
 		<!-- Echo all executed SQL to stdout -->
 		<!-- <property name="show_sql">true</property> -->
 
-		<!-- Drop and re-create the database schema on startup -->
+		<!-- Create the database schema on startup if it does not exist otherwise update only -->
 		<property name="hbm2ddl.auto">update</property>
 
 		<property name="hibernate.jdbc.batch_size">20</property>
