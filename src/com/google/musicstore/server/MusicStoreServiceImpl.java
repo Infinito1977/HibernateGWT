@@ -10,6 +10,10 @@ import com.google.musicstore.server.hibernate.HibernateModule;
 
 public class MusicStoreServiceImpl extends RemoteServiceServlet implements MusicStoreService {
     private static final long serialVersionUID = -4825786932285819100L;
+    
+    public MusicStoreServiceImpl() {
+	HibernateModule.initializeViaConfigFile();
+    }
 
     @Override
     public List<AccountDTO> getAccounts() {

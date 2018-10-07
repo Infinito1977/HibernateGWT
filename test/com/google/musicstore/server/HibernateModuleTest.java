@@ -8,6 +8,10 @@ import com.google.musicstore.server.hibernate.HibernateModule;
 import junit.framework.TestCase;
 
 public class HibernateModuleTest extends TestCase {
+    public void setUp() {
+	HibernateModule.initializeHSQLDB();
+    }
+    
     public void testGet1Account() {
 	save1Account();
 	List<AccountDTO> accounts = HibernateModule.getAccounts();
