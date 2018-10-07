@@ -154,7 +154,7 @@ public class HibernateModule {
 	session.getTransaction().commit();
     }
 
-    public static AccountDTO createAccountDTO(Account account) {
+    private static AccountDTO createAccountDTO(Account account) {
 	Set<Record> records = account.getRecords();
 	Set<RecordDTO> recordDTOs = new HashSet<RecordDTO>(records != null ? records.size() : 0);
 	if (records != null) {
