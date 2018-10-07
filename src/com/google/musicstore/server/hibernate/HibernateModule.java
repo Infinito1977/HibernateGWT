@@ -36,6 +36,8 @@ public class HibernateModule {
 	// Change configuration to hsqldb
 	hsqldbConf.setProperty("hibernate.connection.driver_class", "org.hsqldb.jdbcDriver");
 	hsqldbConf.setProperty("hibernate.connection.url", "jdbc:hsqldb:mem:.");
+//	hsqldbConf.setProperty("hibernate.connection.url", "jdbc:hsqldb:hsql://localhost/");
+//	hsqldbConf.setProperty("hbm2ddl.auto", "create");
 	hsqldbConf.setProperty("hibernate.connection.username", "sa");
 	hsqldbConf.setProperty("hibernate.connection.password", "");
 	hsqldbConf.setProperty("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
