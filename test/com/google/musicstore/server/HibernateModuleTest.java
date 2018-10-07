@@ -13,7 +13,7 @@ public class HibernateModuleTest extends TestCase {
     }
     
     public void testGet1Account() {
-	save1Account();
+	save1Account(1l);
 	List<AccountDTO> accounts = HibernateModule.getAccounts();
 	assertEquals(1, accounts.size());
 	HibernateModule.deleteAccounts();
@@ -36,11 +36,11 @@ public class HibernateModuleTest extends TestCase {
     
     public void testSave1Account() {
 	HibernateModule.deleteAccounts();
-	assertEquals(1, save1Account());
+	assertEquals(1, save1Account(1l));
     }
 
-    private long save1Account() {
-	AccountDTO account = new AccountDTO(1l);
+    private long save1Account(long id) {
+	AccountDTO account = new AccountDTO(id);
 	return HibernateModule.saveAccount(account);
     }
 
