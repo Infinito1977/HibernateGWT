@@ -1,0 +1,4 @@
+Hibernate:
+==========
+https://www.packtpub.com/mapt/book/application_development/9781784391904/1/ch01lvl1sec16/configuring-hibernate-programmatically
+https://examples.javacodegeeks.com/enterprise-java/hibernate/hibernate-configuration-file-tutorial/
