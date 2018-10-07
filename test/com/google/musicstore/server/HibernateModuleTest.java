@@ -13,6 +13,7 @@ public class HibernateModuleTest extends TestCase {
     }
     
     public void testGet1Account() {
+	HibernateModule.deleteAccounts();
 	save1Account(1l);
 	List<AccountDTO> accounts = HibernateModule.getAccounts();
 	assertEquals(1, accounts.size());
@@ -20,6 +21,7 @@ public class HibernateModuleTest extends TestCase {
     }
 
     public void testGet7Accounts() {
+	HibernateModule.deleteAccounts();
 	save7Accounts();
 	List<AccountDTO> accounts = HibernateModule.getAccounts();
 	assertEquals(7, accounts.size());
@@ -34,11 +36,6 @@ public class HibernateModuleTest extends TestCase {
 	fail("not yet implemented");
     }
     
-    public void testSave1Account() {
-	HibernateModule.deleteAccounts();
-	assertEquals(1, save1Account(1l));
-    }
-
     private long save1Account(long id) {
 	AccountDTO account = new AccountDTO(id);
 	return HibernateModule.saveAccount(account);
