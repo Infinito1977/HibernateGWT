@@ -58,7 +58,7 @@ public class ViewAccountRecordsPanel extends VerticalPanel {
 
 	    @Override
 	    public void onFailure(Throwable caught) {
-		Window.alert("Failed to get accounts and records.");
+//		Window.alert("Failed to get accounts and records.");
 		logger.severe(caught.getLocalizedMessage());
 	    }
 

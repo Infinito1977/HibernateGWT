@@ -94,7 +94,7 @@ public class AddRecordsToAccountPanel extends HorizontalPanel {
 	    @Override
 	    public void onFailure(Throwable caught) {
 		blockPanel.setVisible(false);
-		Window.alert("Failed to retrieve accounts.");
+//		Window.alert("Failed to retrieve accounts.");
 		logger.severe(caught.getLocalizedMessage());
 	    }
 
@@ -125,7 +125,7 @@ public class AddRecordsToAccountPanel extends HorizontalPanel {
 	    @Override
 	    public void onFailure(Throwable caught) {
 		blockPanel.setVisible(false);
-		Window.alert("Failed to retrieve records.");
+//		Window.alert("Failed to retrieve records.");
 		logger.severe(caught.getLocalizedMessage());
 	    }
 
